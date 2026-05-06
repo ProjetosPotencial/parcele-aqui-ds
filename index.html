@@ -1,0 +1,3525 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parcele Aqui — Design System</title>
+<meta name="description" content="Design System oficial do Parcele Aqui. Tokens, componentes, princípios e diretrizes para construir com consistência.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kufam:wght@400;500;700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* =============================================================
+   PARCELE AQUI · DESIGN SYSTEM
+   Estética inspirada em Vercel Geist · 2026
+   ============================================================= */
+
+:root {
+  /* Brand · Yellow */
+  --y-50:#FFF9E6; --y-100:#FFEFB3; --y-200:#FFE380; --y-300:#FFD54D;
+  --y-400:#FFC61A; --y-500:#FFB800; --y-600:#E6A600; --y-700:#B38000;
+  --y-800:#805C00; --y-900:#4D3700;
+
+  /* Brand · Green Potencial */
+  --g-50:#E8F5E9; --g-100:#C8E6C9; --g-200:#A5D6A7; --g-300:#81C784;
+  --g-400:#66BB6A; --g-500:#2E7D32; --g-600:#1B5E20; --g-700:#145017;
+  --g-800:#0D3F0F; --g-900:#062E07;
+
+  /* Brand · Blue Negócios (V2) */
+  --b-50:#E3F2FD; --b-100:#BBDEFB; --b-200:#90CAF9; --b-300:#64B5F6;
+  --b-400:#42A5F5; --b-500:#1976D2; --b-600:#1565C0; --b-700:#0D47A1;
+  --b-800:#082F6B; --b-900:#051A3D;
+
+  /* Neutrals (escala fina) */
+  --n-0:#FFFFFF; --n-50:#FAFAFA; --n-100:#F5F5F5; --n-200:#EEEEEE;
+  --n-300:#E0E0E0; --n-400:#BDBDBD; --n-500:#9E9E9E; --n-600:#757575;
+  --n-700:#424242; --n-800:#2E2E2E; --n-900:#1A1A1A; --n-950:#0A0A0A;
+
+  /* Status */
+  --success:#16A34A; --warning:#F59E0B; --error:#DC2626; --info:#0EA5E9;
+
+  /* Semantic — light mode (default) */
+  --bg: var(--n-0);
+  --bg-elevated: var(--n-0);
+  --bg-subtle: var(--n-50);
+  --bg-muted: var(--n-100);
+  --bg-inverse: var(--n-950);
+  --bg-brand: var(--y-500);
+  --bg-brand-subtle: var(--y-50);
+
+  --fg: var(--n-900);
+  --fg-muted: var(--n-600);
+  --fg-subtle: var(--n-500);
+  --fg-inverse: var(--n-0);
+  --fg-brand: var(--y-700);
+
+  --border: var(--n-200);
+  --border-strong: var(--n-300);
+  --border-inverse: var(--n-800);
+
+  /* Typography */
+  --font-display: 'Kufam', Georgia, serif;
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+
+  /* Spacing — 4pt grid */
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:20px; --s-6:24px;
+  --s-8:32px; --s-10:40px; --s-12:48px; --s-16:64px; --s-20:80px;
+  --s-24:96px; --s-32:128px; --s-40:160px;
+
+  /* Radius */
+  --r-xs:4px; --r-sm:6px; --r-md:8px; --r-lg:12px; --r-xl:16px;
+  --r-2xl:24px; --r-3xl:32px; --r-full:9999px;
+
+  /* Shadows (Vercel-like — sutis) */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05), 0 1px 3px 0 rgb(0 0 0 / 0.06);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.06), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+
+  /* Motion */
+  --d-fast: 120ms; --d-base: 200ms; --d-slow: 320ms;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+  /* Layout */
+  --sidebar-w: 264px;
+  --content-max: 880px;
+  --header-h: 64px;
+}
+
+/* Dark mode (toggle ou auto) */
+[data-theme="dark"] {
+  --bg: var(--n-950);
+  --bg-elevated: var(--n-900);
+  --bg-subtle: var(--n-900);
+  --bg-muted: var(--n-800);
+  --bg-inverse: var(--n-0);
+  --bg-brand-subtle: rgba(255, 184, 0, 0.08);
+
+  --fg: var(--n-50);
+  --fg-muted: var(--n-400);
+  --fg-subtle: var(--n-500);
+  --fg-inverse: var(--n-900);
+  --fg-brand: var(--y-400);
+
+  --border: var(--n-800);
+  --border-strong: var(--n-700);
+  --border-inverse: var(--n-200);
+}
+
+/* =============================================================
+   RESET
+   ============================================================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+body {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--fg);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv11', 'ss01', 'ss03';
+  transition: background var(--d-slow) var(--ease), color var(--d-slow) var(--ease);
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+::selection { background: var(--y-300); color: var(--n-900); }
+
+/* Scrollbar refinada */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--n-300); border-radius: 10px; border: 2px solid var(--bg); }
+::-webkit-scrollbar-thumb:hover { background: var(--n-400); }
+[data-theme="dark"] ::-webkit-scrollbar-thumb { background: var(--n-700); }
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: var(--n-600); }
+
+/* =============================================================
+   TOPBAR
+   ============================================================= */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--header-h);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--s-6);
+  gap: var(--s-6);
+}
+[data-theme="dark"] .topbar { background: rgba(10, 10, 10, 0.72); }
+
+.topbar-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+
+.topbar-logo img { height: 24px; width: auto; }
+
+.topbar-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+}
+
+.topbar-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--fg-muted);
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-full);
+  letter-spacing: 0.02em;
+}
+
+.topbar-spacer { flex: 1; }
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-md);
+  display: grid;
+  place-items: center;
+  color: var(--fg-muted);
+  transition: all var(--d-fast) var(--ease);
+}
+.theme-toggle:hover { background: var(--bg-subtle); color: var(--fg); }
+.theme-toggle svg { width: 18px; height: 18px; }
+[data-theme="light"] .theme-toggle .moon { display: block; }
+[data-theme="light"] .theme-toggle .sun { display: none; }
+[data-theme="dark"] .theme-toggle .moon { display: none; }
+[data-theme="dark"] .theme-toggle .sun { display: block; }
+
+.topbar-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fg-muted);
+  transition: color var(--d-fast) var(--ease);
+  padding: 8px 12px;
+  border-radius: var(--r-md);
+}
+.topbar-link:hover { color: var(--fg); background: var(--bg-subtle); }
+
+/* =============================================================
+   LAYOUT
+   ============================================================= */
+.shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  min-height: calc(100vh - var(--header-h));
+}
+
+.sidebar {
+  position: sticky;
+  top: var(--header-h);
+  height: calc(100vh - var(--header-h));
+  overflow-y: auto;
+  padding: var(--s-8) var(--s-5);
+  border-right: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.nav-group { margin-bottom: var(--s-6); }
+
+.nav-group-title {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+  padding: 0 var(--s-3);
+  margin-bottom: var(--s-2);
+}
+
+.nav-link {
+  display: block;
+  padding: 6px var(--s-3);
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--fg-muted);
+  border-radius: var(--r-sm);
+  transition: all var(--d-fast) var(--ease);
+  position: relative;
+}
+
+.nav-link:hover { color: var(--fg); background: var(--bg-subtle); }
+
+.nav-link.active {
+  color: var(--fg);
+  font-weight: 500;
+  background: var(--bg-subtle);
+}
+
+.nav-link.active::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 16px;
+  background: var(--y-500);
+  border-radius: 2px;
+}
+
+.main {
+  padding: var(--s-16) var(--s-12);
+  max-width: var(--content-max);
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* =============================================================
+   TYPOGRAPHY (documentação)
+   ============================================================= */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-brand);
+  margin-bottom: var(--s-3);
+  display: inline-block;
+}
+
+.h1 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4.5vw, 52px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  margin-bottom: var(--s-4);
+}
+
+.h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  margin: var(--s-16) 0 var(--s-5);
+  scroll-margin-top: 96px;
+}
+
+.h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  color: var(--fg);
+  margin: var(--s-10) 0 var(--s-3);
+}
+
+.h4 {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--fg);
+  margin: var(--s-6) 0 var(--s-2);
+  letter-spacing: 0;
+}
+
+.lead {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--fg-muted);
+  margin-bottom: var(--s-8);
+  max-width: 60ch;
+  font-weight: 400;
+}
+
+.p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--fg);
+  margin-bottom: var(--s-4);
+  max-width: 65ch;
+}
+
+.p-muted { color: var(--fg-muted); }
+
+.p strong { color: var(--fg); font-weight: 600; }
+
+ul.list, ol.list {
+  margin: var(--s-3) 0 var(--s-5);
+  padding-left: var(--s-5);
+  max-width: 65ch;
+}
+
+ul.list li, ol.list li {
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: var(--s-2);
+  color: var(--fg);
+}
+
+ul.list li::marker { color: var(--fg-subtle); }
+
+code.inline {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--bg-muted);
+  padding: 2px 6px;
+  border-radius: var(--r-xs);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  font-weight: 500;
+}
+
+/* Section anchor */
+.section { padding-bottom: var(--s-8); }
+
+/* =============================================================
+   HERO (página inicial)
+   ============================================================= */
+.hero {
+  margin-bottom: var(--s-20);
+  padding-top: var(--s-4);
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-bottom: var(--s-4);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.hero-eyebrow .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--r-full);
+  background: var(--success);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
+}
+
+.hero-meta {
+  display: flex;
+  gap: var(--s-2);
+  margin-top: var(--s-6);
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 12px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--r-full);
+  color: var(--fg-muted);
+}
+
+.meta-pill strong { color: var(--fg); font-weight: 600; }
+
+/* =============================================================
+   CALLOUT
+   ============================================================= */
+.callout {
+  display: flex;
+  gap: var(--s-3);
+  padding: var(--s-4) var(--s-5);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--bg-subtle);
+  margin: var(--s-5) 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.callout-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+}
+
+.callout-content { flex: 1; }
+.callout-content strong { display: block; margin-bottom: 2px; color: var(--fg); }
+.callout-content p { color: var(--fg-muted); margin: 0; }
+
+.callout-warning { border-color: rgba(245, 158, 11, 0.3); background: rgba(245, 158, 11, 0.05); }
+.callout-warning .callout-icon { color: var(--warning); }
+
+.callout-info { border-color: rgba(14, 165, 233, 0.3); background: rgba(14, 165, 233, 0.05); }
+.callout-info .callout-icon { color: var(--info); }
+
+.callout-success { border-color: rgba(22, 163, 74, 0.3); background: rgba(22, 163, 74, 0.05); }
+.callout-success .callout-icon { color: var(--success); }
+
+/* =============================================================
+   ARQUITETURA — VISUAL PIPELINE
+   ============================================================= */
+.architecture {
+  display: grid;
+  gap: var(--s-3);
+  margin: var(--s-6) 0;
+}
+
+.arch-layer {
+  position: relative;
+  padding: var(--s-5);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  transition: all var(--d-base) var(--ease);
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: var(--s-5);
+  align-items: center;
+}
+
+.arch-layer:hover {
+  border-color: var(--border-strong);
+  transform: translateX(2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.arch-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--fg-subtle);
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  background: var(--bg-subtle);
+  border-radius: var(--r-md);
+}
+
+.arch-info { min-width: 0; }
+.arch-title { font-family: var(--font-display); font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+.arch-desc { font-size: 14px; color: var(--fg-muted); line-height: 1.5; }
+
+.arch-code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: var(--n-950);
+  color: var(--y-300);
+  padding: 8px 12px;
+  border-radius: var(--r-sm);
+  white-space: nowrap;
+}
+
+.arch-arrow {
+  display: grid;
+  place-items: center;
+  color: var(--fg-subtle);
+  margin: -4px 0;
+}
+
+/* =============================================================
+   COLOR SWATCHES
+   ============================================================= */
+.brand-color {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin: var(--s-5) 0;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  min-height: 200px;
+}
+
+.brand-color-swatch {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: var(--s-8);
+}
+
+.brand-color-swatch .label {
+  position: absolute;
+  top: var(--s-4);
+  left: var(--s-4);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: var(--r-xs);
+  backdrop-filter: blur(4px);
+}
+
+.brand-color-info {
+  padding: var(--s-6) var(--s-8);
+  background: var(--bg-elevated);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brand-color-info h4 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: var(--s-2);
+}
+
+.brand-color-info p {
+  font-size: 14px;
+  color: var(--fg-muted);
+  margin-bottom: var(--s-4);
+  line-height: 1.5;
+}
+
+.brand-color-meta {
+  display: grid;
+  gap: var(--s-1);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.brand-color-meta div { display: flex; justify-content: space-between; padding: 2px 0; }
+.brand-color-meta span:first-child { color: var(--fg-muted); }
+.brand-color-meta span:last-child { color: var(--fg); font-weight: 600; }
+
+.color-scale {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: var(--s-2);
+  margin: var(--s-4) 0;
+}
+
+.scale-item {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: transform var(--d-fast) var(--ease);
+  cursor: pointer;
+}
+.scale-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+.scale-color { height: 64px; }
+
+.scale-meta {
+  padding: var(--s-2) var(--s-3);
+  background: var(--bg-elevated);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  border-top: 1px solid var(--border);
+}
+
+.scale-name { font-weight: 600; margin-bottom: 1px; }
+.scale-hex { color: var(--fg-muted); font-size: 10px; }
+
+/* =============================================================
+   TOKEN TABLE
+   ============================================================= */
+.token-table {
+  display: grid;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  margin: var(--s-4) 0;
+}
+
+.token-row {
+  display: grid;
+  grid-template-columns: 56px 1.4fr 1fr 1.6fr;
+  gap: var(--s-4);
+  padding: var(--s-3) var(--s-4);
+  background: var(--bg-elevated);
+  align-items: center;
+  transition: background var(--d-fast) var(--ease);
+}
+
+.token-row:hover { background: var(--bg-subtle); }
+
+.token-preview {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-sm);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.token-preview-text {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-sm);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.token-name {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--fg);
+  word-break: break-all;
+}
+
+.token-value {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--fg-muted);
+  word-break: break-all;
+}
+
+.token-usage {
+  font-size: 13px;
+  color: var(--fg-muted);
+  line-height: 1.4;
+}
+
+/* =============================================================
+   TYPOGRAPHY DEMO
+   ============================================================= */
+.type-spec {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: var(--s-6);
+  padding: var(--s-6);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  margin-bottom: var(--s-3);
+  align-items: center;
+  transition: border-color var(--d-fast) var(--ease);
+}
+
+.type-spec:hover { border-color: var(--border-strong); }
+
+.type-sample {
+  font-family: var(--font-display);
+  color: var(--fg);
+  font-weight: 700;
+}
+
+.type-sample.body { font-family: var(--font-sans); font-weight: 400; }
+.type-sample.label { font-family: var(--font-sans); font-weight: 600; letter-spacing: 0.01em; }
+
+.type-info {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--fg-muted);
+  display: grid;
+  gap: 4px;
+  padding: var(--s-3) var(--s-4);
+  background: var(--bg-subtle);
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+}
+
+.type-info .row { display: flex; justify-content: space-between; }
+.type-info .row strong { color: var(--fg); font-weight: 600; }
+
+.type-info .star {
+  font-size: 10px;
+  color: var(--y-700);
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
+
+/* =============================================================
+   SPACING SCALE
+   ============================================================= */
+.spacing-scale {
+  display: grid;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  margin: var(--s-5) 0;
+}
+
+.spacing-row {
+  display: grid;
+  grid-template-columns: 80px 80px 1fr;
+  gap: var(--s-4);
+  padding: var(--s-2) var(--s-4);
+  background: var(--bg-elevated);
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.spacing-name { font-weight: 600; }
+.spacing-val { color: var(--fg-muted); }
+.spacing-bar { height: 24px; background: var(--y-500); border-radius: 3px; }
+
+/* =============================================================
+   RADIUS DEMO
+   ============================================================= */
+.radius-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--s-3);
+  margin: var(--s-5) 0;
+}
+
+.radius-card {
+  padding: var(--s-5);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  text-align: center;
+  transition: border-color var(--d-fast) var(--ease);
+}
+.radius-card:hover { border-color: var(--border-strong); }
+
+.radius-demo {
+  width: 64px;
+  height: 64px;
+  background: var(--y-500);
+  margin: 0 auto var(--s-3);
+}
+
+.radius-name { font-family: var(--font-mono); font-size: 11px; font-weight: 600; }
+.radius-val { font-family: var(--font-mono); font-size: 10px; color: var(--fg-muted); }
+
+/* =============================================================
+   SHADOW DEMO
+   ============================================================= */
+.shadow-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--s-5);
+  margin: var(--s-5) 0;
+  padding: var(--s-8);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+}
+
+.shadow-card {
+  padding: var(--s-5);
+  background: var(--bg-elevated);
+  border-radius: var(--r-md);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.shadow-card .name { font-weight: 600; margin-bottom: 2px; }
+.shadow-card .desc { color: var(--fg-muted); font-size: 10px; }
+
+/* =============================================================
+   COMPONENT DEMOS
+   ============================================================= */
+.demo {
+  padding: var(--s-8);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  margin: var(--s-4) 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  align-items: center;
+}
+
+.demo-stack { flex-direction: column; align-items: stretch; gap: var(--s-3); }
+
+/* Buttons */
+.btn {
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: var(--r-full);
+  cursor: pointer;
+  transition: all var(--d-fast) var(--ease);
+  letter-spacing: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.btn-primary { background: var(--y-500); color: var(--n-900); }
+.btn-primary:hover { background: var(--y-600); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-secondary {
+  background: var(--bg-elevated);
+  color: var(--fg);
+  border-color: var(--border-strong);
+}
+.btn-secondary:hover { border-color: var(--fg); background: var(--bg); }
+
+.btn-ghost { background: transparent; color: var(--fg); }
+.btn-ghost:hover { background: var(--bg-muted); }
+
+.btn-dark { background: var(--n-950); color: var(--n-0); }
+.btn-dark:hover { background: var(--n-800); }
+
+.btn-sm { padding: 8px 14px; font-size: 13px; }
+.btn-lg { padding: 14px 28px; font-size: 16px; }
+
+/* Inputs */
+.input {
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  padding: 11px 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-md);
+  background: var(--bg-elevated);
+  color: var(--fg);
+  width: 100%;
+  max-width: 280px;
+  transition: all var(--d-fast) var(--ease);
+}
+
+.input::placeholder { color: var(--fg-subtle); }
+.input:focus {
+  outline: none;
+  border-color: var(--y-500);
+  box-shadow: 0 0 0 3px rgba(255, 184, 0, 0.18);
+}
+
+/* Cards */
+.card {
+  padding: var(--s-6);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  max-width: 320px;
+  transition: all var(--d-base) var(--ease);
+  cursor: pointer;
+}
+
+.card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.card-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--y-100);
+  border-radius: var(--r-md);
+  display: grid;
+  place-items: center;
+  margin-bottom: var(--s-4);
+  font-size: 18px;
+}
+
+[data-theme="dark"] .card-icon { background: rgba(255, 184, 0, 0.12); }
+
+.card-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.card-desc { font-size: 13.5px; color: var(--fg-muted); line-height: 1.5; }
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 600;
+  border-radius: var(--r-full);
+  border: 1px solid;
+}
+
+.badge-yellow { background: var(--y-50); color: var(--y-800); border-color: var(--y-200); }
+.badge-green { background: var(--g-50); color: var(--g-800); border-color: var(--g-200); }
+.badge-blue { background: var(--b-50); color: var(--b-800); border-color: var(--b-200); }
+.badge-neutral { background: var(--bg-subtle); color: var(--fg); border-color: var(--border-strong); }
+
+[data-theme="dark"] .badge-yellow { background: rgba(255, 184, 0, 0.1); color: var(--y-300); border-color: rgba(255, 184, 0, 0.2); }
+[data-theme="dark"] .badge-green { background: rgba(46, 125, 50, 0.15); color: var(--g-300); border-color: rgba(46, 125, 50, 0.3); }
+[data-theme="dark"] .badge-blue { background: rgba(25, 118, 210, 0.15); color: var(--b-300); border-color: rgba(25, 118, 210, 0.3); }
+
+/* =============================================================
+   CODE BLOCK
+   ============================================================= */
+.code {
+  background: var(--n-950);
+  color: var(--n-100);
+  padding: var(--s-5);
+  border-radius: var(--r-lg);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  overflow-x: auto;
+  margin: var(--s-4) 0;
+  border: 1px solid var(--n-900);
+}
+
+.code .k { color: #ff79c6; }
+.code .p { color: #8be9fd; }
+.code .v { color: var(--y-300); }
+.code .c { color: #6272a4; font-style: italic; }
+
+/* =============================================================
+   GUIDE STEP
+   ============================================================= */
+.guide-step {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: var(--s-5);
+  padding: var(--s-5);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  margin-bottom: var(--s-3);
+  transition: border-color var(--d-fast) var(--ease);
+}
+
+.guide-step:hover { border-color: var(--y-500); }
+
+.guide-num {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--y-700);
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  background: var(--y-50);
+  border-radius: var(--r-md);
+  align-self: start;
+}
+
+[data-theme="dark"] .guide-num { background: rgba(255, 184, 0, 0.1); color: var(--y-400); }
+
+.guide-content h4 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--fg);
+}
+
+.guide-content p {
+  font-size: 14px;
+  color: var(--fg-muted);
+  line-height: 1.6;
+  margin-bottom: var(--s-2);
+}
+
+.guide-content code {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  background: var(--n-950);
+  color: var(--y-300);
+  padding: 2px 6px;
+  border-radius: var(--r-xs);
+}
+
+/* =============================================================
+   DO / DON'T
+   ============================================================= */
+.do-dont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-3);
+  margin: var(--s-4) 0;
+}
+
+.do-dont-card {
+  padding: var(--s-5);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+}
+
+.do-dont-card.do { border-color: rgba(22, 163, 74, 0.3); }
+.do-dont-card.dont { border-color: rgba(220, 38, 38, 0.25); }
+
+.do-dont-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: var(--s-3);
+  padding: 4px 10px;
+  border-radius: var(--r-full);
+}
+
+.do .do-dont-label { background: var(--g-50); color: var(--g-700); }
+.dont .do-dont-label { background: rgba(220, 38, 38, 0.08); color: var(--error); }
+
+[data-theme="dark"] .do .do-dont-label { background: rgba(22, 163, 74, 0.15); color: var(--g-300); }
+[data-theme="dark"] .dont .do-dont-label { background: rgba(220, 38, 38, 0.15); color: #f87171; }
+
+.do-dont-card p { font-size: 14px; line-height: 1.6; color: var(--fg-muted); }
+
+/* =============================================================
+   PERSONA CARDS
+   ============================================================= */
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--s-3);
+  margin: var(--s-5) 0;
+}
+
+.persona-card {
+  padding: var(--s-6);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  transition: all var(--d-base) var(--ease);
+}
+
+.persona-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.persona-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--y-500);
+  border-radius: var(--r-lg);
+  display: grid;
+  place-items: center;
+  margin-bottom: var(--s-4);
+  font-size: 22px;
+}
+
+.persona-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: var(--s-1);
+}
+
+.persona-segment {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: var(--s-4);
+}
+
+.persona-section {
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--border);
+  margin-top: var(--s-3);
+}
+
+.persona-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--fg-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+
+.persona-section-text { font-size: 14px; line-height: 1.5; color: var(--fg); }
+
+/* =============================================================
+   FUNNEL
+   ============================================================= */
+.funnel {
+  display: grid;
+  gap: var(--s-2);
+  margin: var(--s-5) 0;
+}
+
+.funnel-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: var(--s-5);
+  padding: var(--s-5);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+}
+
+.funnel-stage::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 4px 0 0 4px;
+}
+
+.funnel-stage.top::before { background: var(--y-500); }
+.funnel-stage.mid::before { background: var(--g-500); }
+.funnel-stage.bot::before { background: var(--b-500); }
+
+.funnel-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  align-self: start;
+  padding-top: 2px;
+}
+
+.funnel-content h4 { font-family: var(--font-display); font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.funnel-content p { font-size: 13.5px; color: var(--fg-muted); line-height: 1.5; }
+
+.funnel-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-3);
+}
+
+.funnel-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 3px 8px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xs);
+  color: var(--fg-muted);
+}
+
+/* =============================================================
+   LOGO BOARD
+   ============================================================= */
+.logo-board {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--s-4);
+  margin: var(--s-5) 0;
+  align-items: stretch;
+}
+
+.logo-main {
+  display: grid;
+  place-items: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: var(--s-12);
+  min-height: 240px;
+}
+
+.logo-main img { max-width: 320px; height: auto; }
+
+.logo-side {
+  display: grid;
+  gap: var(--s-3);
+  grid-template-rows: 1fr 1fr;
+}
+
+.logo-variant {
+  display: grid;
+  place-items: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--s-6);
+  position: relative;
+  min-height: 110px;
+}
+
+.logo-variant.dark { background: var(--n-950); }
+.logo-variant.brand { background: var(--y-500); }
+
+.logo-variant img { max-width: 140px; height: auto; }
+
+.logo-variant-label {
+  position: absolute;
+  bottom: var(--s-2);
+  left: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border-radius: var(--r-xs);
+  color: var(--n-700);
+}
+
+[data-theme="dark"] .logo-variant-label { background: rgba(0, 0, 0, 0.6); color: var(--n-300); }
+
+.logo-variant.dark .logo-variant-label { background: rgba(255, 255, 255, 0.15); color: var(--n-100); }
+.logo-variant.brand .logo-variant-label { background: rgba(0, 0, 0, 0.7); color: white; }
+
+/* =============================================================
+   QUOTE
+   ============================================================= */
+.quote {
+  margin: var(--s-6) 0;
+  padding: var(--s-8);
+  background: var(--bg-subtle);
+  border-left: 3px solid var(--y-500);
+  border-radius: 0 var(--r-lg) var(--r-lg) 0;
+}
+
+.quote-text {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+  margin-bottom: var(--s-3);
+}
+
+.quote-author {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-muted);
+  letter-spacing: 0.04em;
+}
+
+/* =============================================================
+   FOOTER
+   ============================================================= */
+.footer {
+  margin-top: var(--s-24);
+  padding-top: var(--s-8);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-muted);
+}
+
+/* =============================================================
+   HERO CONCEITUAL — Zendesk meets Fintech (orbs version)
+   ============================================================= */
+.hero-conceptual {
+  position: relative;
+  margin: calc(var(--s-8) * -1) calc(var(--s-12) * -1) 0;
+  padding: var(--s-20) var(--s-12) var(--s-16);
+  overflow: hidden;
+  background: var(--bg);
+  isolation: isolate;
+}
+
+/* Mesh gradient de fundo */
+.hero-conceptual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 0%, rgba(255, 184, 0, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 80% 100%, rgba(255, 184, 0, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(255, 214, 77, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+[data-theme="dark"] .hero-conceptual::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 0%, rgba(255, 184, 0, 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 80% 100%, rgba(255, 184, 0, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(255, 214, 77, 0.06) 0%, transparent 60%);
+}
+
+/* Grid técnico sutil */
+.hero-conceptual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: -1px -1px;
+  opacity: 0.4;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Orbs animados */
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+  pointer-events: none;
+  animation: floatOrb 20s ease-in-out infinite;
+  z-index: -1;
+}
+
+.hero-orb-1 {
+  top: -100px;
+  right: 10%;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, var(--y-400) 0%, var(--y-500) 100%);
+  animation-delay: 0s;
+}
+
+.hero-orb-2 {
+  bottom: -120px;
+  left: 5%;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, var(--y-300) 0%, var(--y-400) 100%);
+  animation-delay: -7s;
+  opacity: 0.4;
+}
+
+[data-theme="dark"] .hero-orb {
+  opacity: 0.35;
+}
+
+@keyframes floatOrb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -40px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+/* Conteúdo da hero */
+.hero-content {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+/* Top row: status + meta */
+.hero-toprow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  margin-bottom: var(--s-12);
+  flex-wrap: wrap;
+}
+
+.hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 6px 14px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-full);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--fg-muted);
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hero-status-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+}
+
+.hero-status-dot::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: var(--success);
+  opacity: 0.4;
+  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  0% { transform: scale(1); opacity: 0.4; }
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
+
+.hero-status strong {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.hero-meta-right {
+  display: flex;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+
+.hero-mini-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  padding: 5px 10px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  color: var(--fg-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Headline gigante editorial (v1 style) */
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 9vw, 128px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--fg);
+  margin-bottom: var(--s-8);
+  position: relative;
+  animation: heroSlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-headline .accent {
+  display: inline-block;
+  position: relative;
+  background: linear-gradient(135deg, var(--y-500) 0%, var(--y-400) 50%, var(--y-600) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-headline .accent::after {
+  content: '';
+  position: absolute;
+  bottom: 0.1em;
+  left: 0;
+  right: 0;
+  height: 0.08em;
+  background: var(--y-500);
+  border-radius: 4px;
+  opacity: 0.3;
+}
+
+.hero-headline .period {
+  color: var(--y-500);
+  display: inline-block;
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes heroSlideIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sub-lead */
+.hero-sublead {
+  font-family: var(--font-sans);
+  font-size: clamp(16px, 1.6vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--fg-muted);
+  max-width: 56ch;
+  margin-bottom: var(--s-12);
+  animation: heroSlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.hero-sublead strong { color: var(--fg); font-weight: 600; }
+
+/* Metricas com sparklines (Tremor-inspired) */
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-3);
+  margin-bottom: var(--s-10);
+  animation: heroSlideIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
+.metric-card {
+  position: relative;
+  padding: var(--s-5);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow: hidden;
+  transition: all var(--d-base) var(--ease);
+  cursor: default;
+}
+
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--y-500), transparent);
+  opacity: 0;
+  transition: opacity var(--d-base) var(--ease);
+}
+
+.metric-card:hover {
+  border-color: var(--y-500);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -8px rgba(255, 184, 0, 0.25);
+}
+
+.metric-card:hover::before { opacity: 1; }
+
+.metric-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--s-3);
+}
+
+.metric-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-sm);
+  background: var(--y-50);
+  color: var(--y-700);
+}
+
+[data-theme="dark"] .metric-icon {
+  background: rgba(255, 184, 0, 0.12);
+  color: var(--y-400);
+}
+
+.metric-icon svg { width: 14px; height: 14px; }
+
+/* Sparkline */
+.metric-sparkline {
+  width: 60px;
+  height: 24px;
+}
+
+.metric-sparkline path {
+  stroke: var(--y-500);
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.metric-sparkline .area {
+  fill: var(--y-500);
+  opacity: 0.12;
+  stroke: none;
+}
+
+.metric-value {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--fg);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.metric-value .num {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-value .suffix {
+  font-size: 18px;
+  color: var(--fg-muted);
+  font-weight: 700;
+}
+
+.metric-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--fg-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* CTA row */
+.hero-cta-row {
+  display: flex;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  align-items: center;
+  animation: heroSlideIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 11px 20px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--r-full);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--d-fast) var(--ease);
+  text-decoration: none;
+}
+
+.hero-btn-primary {
+  background: var(--y-500);
+  color: var(--n-900);
+  box-shadow: 0 4px 12px -2px rgba(255, 184, 0, 0.4);
+}
+
+.hero-btn-primary:hover {
+  background: var(--y-600);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -2px rgba(255, 184, 0, 0.5);
+}
+
+.hero-btn-ghost {
+  background: var(--bg-elevated);
+  color: var(--fg);
+  border-color: var(--border-strong);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hero-btn-ghost:hover {
+  border-color: var(--fg);
+  background: var(--bg);
+}
+
+.hero-btn svg { width: 14px; height: 14px; }
+
+/* Versão e logo flutuante (canto) — Redwood: mais discreto */
+.hero-floating-logo {
+  position: absolute;
+  top: var(--s-12);
+  right: var(--s-12);
+  width: 72px;
+  height: 72px;
+  border-radius: var(--r-xl);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: floatLogo 8s ease-in-out infinite, heroSlideIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  box-shadow: var(--shadow-md);
+  z-index: 2;
+}
+
+.hero-floating-logo img {
+  width: 48px;
+  height: auto;
+}
+
+@keyframes floatLogo {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-6px) rotate(2deg); }
+}
+
+/* =============================================================
+   SISTEMA EM USO — Live preview do DS abaixo da hero
+   ============================================================= */
+.system-preview {
+  position: relative;
+  padding: var(--s-12) var(--s-12) var(--s-16);
+  margin: 0 calc(var(--s-12) * -1) var(--s-20);
+  background: var(--bg-subtle);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--s-8);
+  flex-wrap: wrap;
+  gap: var(--s-3);
+}
+
+.preview-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.preview-eyebrow .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.15);
+}
+
+.preview-title {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  margin-top: var(--s-2);
+}
+
+.preview-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-muted);
+  padding: 5px 10px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  letter-spacing: 0.04em;
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1.4fr 1fr;
+  gap: var(--s-4);
+  align-items: stretch;
+}
+
+/* Tile padrão */
+.preview-tile {
+  position: relative;
+  padding: var(--s-5);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  transition: all var(--d-base) var(--ease);
+}
+
+.preview-tile:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.tile-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+
+.tile-label .count {
+  font-size: 10px;
+  padding: 2px 6px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xs);
+  color: var(--fg-muted);
+  letter-spacing: 0.04em;
+}
+
+/* Tile 1: Cores */
+.preview-colors {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  flex: 1;
+}
+
+.preview-colors .swatch {
+  aspect-ratio: 1;
+  border-radius: var(--r-sm);
+  border: 1px solid rgba(0,0,0,0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-colors .swatch::after {
+  content: attr(data-name);
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 3px 4px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-align: center;
+  background: rgba(255,255,255,0.85);
+  color: var(--n-800);
+  opacity: 0;
+  transition: opacity var(--d-fast) var(--ease);
+}
+
+.preview-colors .swatch:hover::after { opacity: 1; }
+
+/* Tile 2: Tipografia */
+.preview-type {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  justify-content: center;
+}
+
+.type-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  padding-bottom: var(--s-2);
+  border-bottom: 1px dashed var(--border);
+}
+
+.type-row:last-child { border-bottom: none; }
+
+.type-row .sample {
+  flex: 1;
+  color: var(--fg);
+}
+
+.type-row .meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--fg-subtle);
+  white-space: nowrap;
+}
+
+.type-row .display-sample {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.type-row .heading-sample {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.type-row .body-sample {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--fg-muted);
+}
+
+.type-row .label-sample {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* Tile 3: Component live */
+.preview-component {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.live-card {
+  flex: 1;
+  padding: var(--s-4);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.live-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-md);
+  background: var(--y-50);
+  color: var(--y-800);
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+}
+
+[data-theme="dark"] .live-card-icon {
+  background: rgba(255, 184, 0, 0.12);
+  color: var(--y-400);
+}
+
+.live-card-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--fg);
+  line-height: 1.2;
+}
+
+.live-card-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--fg-muted);
+}
+
+.live-button {
+  margin-top: auto;
+  padding: 9px 14px;
+  background: var(--y-500);
+  color: var(--n-900);
+  border: none;
+  border-radius: var(--r-full);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all var(--d-fast) var(--ease);
+  width: fit-content;
+}
+
+.live-button:hover {
+  background: var(--y-600);
+  transform: translateY(-1px);
+}
+
+.live-button svg { width: 12px; height: 12px; }
+
+/* Responsive da hero */
+@media (max-width: 768px) {
+  .hero-conceptual {
+    padding: var(--s-12) var(--s-5) var(--s-10);
+    margin: calc(var(--s-8) * -1) calc(var(--s-5) * -1) 0;
+  }
+  .hero-metrics { grid-template-columns: repeat(2, 1fr); }
+  .hero-floating-logo { display: none; }
+  .system-preview {
+    padding: var(--s-10) var(--s-5) var(--s-12);
+    margin: 0 calc(var(--s-5) * -1) var(--s-12);
+  }
+  .preview-grid { grid-template-columns: 1fr; }
+}
+
+/* =============================================================
+   RESPONSIVE
+   ============================================================= */
+@media (max-width: 960px) {
+  .shell { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .main { padding: var(--s-8) var(--s-5); }
+  .type-spec { grid-template-columns: 1fr; }
+  .brand-color { grid-template-columns: 1fr; }
+  .do-dont { grid-template-columns: 1fr; }
+  .arch-layer { grid-template-columns: 1fr; gap: var(--s-3); }
+  .arch-num { width: 100%; height: auto; padding: var(--s-2); }
+  .logo-board { grid-template-columns: 1fr; }
+  .funnel-stage { grid-template-columns: 1fr; gap: var(--s-2); }
+}
+
+/* Animação de entrada das seções */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section { animation: fadeInUp 0.4s var(--ease-out) both; }
+</style>
+</head>
+<body>
+<!-- ============== TOPBAR ============== -->
+<header class="topbar">
+  <div class="topbar-logo">
+    <img id="logo-topbar" alt="Parcele Aqui" />
+    <span style="display:none;">parceleaqui</span>
+  </div>
+  <div class="topbar-divider"></div>
+  <span class="topbar-tag">Design System · v1.0</span>
+  <div class="topbar-spacer"></div>
+  <div class="topbar-actions">
+    <a href="#filosofia" class="topbar-link">Filosofia</a>
+    <a href="#cores" class="topbar-link">Foundations</a>
+    <a href="#botoes" class="topbar-link">Componentes</a>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="shell">
+  <!-- ============== SIDEBAR ============== -->
+  <aside class="sidebar">
+    <div class="nav-group">
+      <div class="nav-group-title">Visão geral</div>
+      <a class="nav-link" href="#filosofia">Filosofia</a>
+      <a class="nav-link" href="#missao">Missão e voz</a>
+      <a class="nav-link" href="#autoridade">Autoridade Potencial</a>
+      <a class="nav-link" href="#arquitetura">Arquitetura de tokens</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">Marca</div>
+      <a class="nav-link" href="#logo">Logo</a>
+      <a class="nav-link" href="#tom">Tom de voz</a>
+      <a class="nav-link" href="#personas">Personas</a>
+      <a class="nav-link" href="#funil">Estrutura GTM</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">Foundations</div>
+      <a class="nav-link" href="#cores">Cores</a>
+      <a class="nav-link" href="#tipografia">Tipografia</a>
+      <a class="nav-link" href="#spacing">Spacing</a>
+      <a class="nav-link" href="#radius">Radius</a>
+      <a class="nav-link" href="#shadows">Sombras</a>
+      <a class="nav-link" href="#motion">Motion</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">Componentes</div>
+      <a class="nav-link" href="#botoes">Botões</a>
+      <a class="nav-link" href="#inputs">Inputs</a>
+      <a class="nav-link" href="#cards">Cards</a>
+      <a class="nav-link" href="#badges">Badges</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">Aplicação</div>
+      <a class="nav-link" href="#metodologias">Metodologias</a>
+      <a class="nav-link" href="#regras">Regras críticas</a>
+      <a class="nav-link" href="#guia-figma">Guia Figma</a>
+      <a class="nav-link" href="#guia-framer">Guia Framer</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">Roadmap</div>
+      <a class="nav-link" href="#roadmap">Próximas versões</a>
+    </div>
+  </aside>
+
+  <!-- ============== MAIN ============== -->
+  <main class="main">
+
+    <!-- ============== HERO CONCEITUAL (orbs + métricas com sparklines) ============== -->
+    <section class="hero-conceptual">
+      <!-- Orbs animados -->
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+
+      <!-- Logo flutuante no canto -->
+      <div class="hero-floating-logo">
+        <img id="logo-floating" alt="Parcele Aqui" />
+      </div>
+
+      <div class="hero-content">
+        <!-- Top: status + meta badges -->
+        <div class="hero-toprow">
+          <div class="hero-status">
+            <span class="hero-status-dot"></span>
+            <strong>Live</strong>
+            <span style="opacity:0.5">·</span>
+            <span>v1.0 · Foundation</span>
+          </div>
+          <div class="hero-meta-right">
+            <span class="hero-mini-badge">Maio 2026</span>
+            <span class="hero-mini-badge">Time Parcele Aqui</span>
+            <span class="hero-mini-badge">Documento vivo</span>
+          </div>
+        </div>
+
+        <!-- Headline editorial gigante -->
+        <h1 class="hero-headline">
+          <span class="accent">Design</span>
+          <br>
+          System<span class="period">.</span>
+        </h1>
+
+        <!-- Sub-lead -->
+        <p class="hero-sublead">
+          A fonte da verdade visual e estratégica do Parcele Aqui. <strong>Tokens, componentes, princípios e diretrizes</strong> que sustentam cada landing page, página de produto e ponto de contato com o cliente.
+        </p>
+
+        <!-- Métricas com sparklines -->
+        <div class="hero-metrics">
+          <div class="metric-card">
+            <div class="metric-header">
+              <div class="metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>
+              </div>
+              <svg class="metric-sparkline" viewBox="0 0 60 24" preserveAspectRatio="none">
+                <path class="area" d="M 0,18 L 8,16 L 16,17 L 24,12 L 32,14 L 40,8 L 48,10 L 60,4 L 60,24 L 0,24 Z" />
+                <path d="M 0,18 L 8,16 L 16,17 L 24,12 L 32,14 L 40,8 L 48,10 L 60,4" />
+              </svg>
+            </div>
+            <div class="metric-value">
+              <span class="num" data-target="23">0</span>
+            </div>
+            <div class="metric-label">Seções</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <div class="metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+              </div>
+              <svg class="metric-sparkline" viewBox="0 0 60 24" preserveAspectRatio="none">
+                <path class="area" d="M 0,20 L 10,18 L 20,15 L 30,16 L 40,11 L 50,7 L 60,3 L 60,24 L 0,24 Z" />
+                <path d="M 0,20 L 10,18 L 20,15 L 30,16 L 40,11 L 50,7 L 60,3" />
+              </svg>
+            </div>
+            <div class="metric-value">
+              <span class="num" data-target="60">0</span>
+              <span class="suffix">+</span>
+            </div>
+            <div class="metric-label">Tokens</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <div class="metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              </div>
+              <svg class="metric-sparkline" viewBox="0 0 60 24" preserveAspectRatio="none">
+                <path class="area" d="M 0,22 L 10,20 L 20,21 L 30,16 L 40,17 L 50,12 L 60,9 L 60,24 L 0,24 Z" />
+                <path d="M 0,22 L 10,20 L 20,21 L 30,16 L 40,17 L 50,12 L 60,9" />
+              </svg>
+            </div>
+            <div class="metric-value">
+              <span class="num" data-target="12">0</span>
+            </div>
+            <div class="metric-label">Componentes</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <div class="metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <svg class="metric-sparkline" viewBox="0 0 60 24" preserveAspectRatio="none">
+                <path class="area" d="M 0,16 L 12,14 L 24,15 L 36,10 L 48,11 L 60,5 L 60,24 L 0,24 Z" />
+                <path d="M 0,16 L 12,14 L 24,15 L 36,10 L 48,11 L 60,5" />
+              </svg>
+            </div>
+            <div class="metric-value">
+              <span class="num" data-target="5">0</span>
+              <span class="suffix">x</span>
+            </div>
+            <div class="metric-label">Personas</div>
+          </div>
+        </div>
+
+        <!-- CTAs -->
+        <div class="hero-cta-row">
+          <a href="#filosofia" class="hero-btn hero-btn-primary">
+            Começar a explorar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="#cores" class="hero-btn hero-btn-ghost">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+            Ver foundations
+          </a>
+          <a href="#botoes" class="hero-btn hero-btn-ghost">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            Componentes
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== SISTEMA EM USO (System Preview) ============== -->
+    <section class="system-preview" aria-label="Demonstração visual do design system">
+      <div class="preview-header">
+        <div>
+          <div class="preview-eyebrow">
+            <span class="dot"></span>
+            Sistema em uso
+          </div>
+          <h2 class="preview-title">Foundations conectadas em três tiles.</h2>
+        </div>
+        <span class="preview-meta">Live preview · v1.0</span>
+      </div>
+
+      <div class="preview-grid">
+        <!-- Tile 1: Cores -->
+        <div class="preview-tile">
+          <div class="tile-label">
+            <span>Color tokens</span>
+            <span class="count">10 escalas</span>
+          </div>
+          <div class="preview-colors">
+            <div class="swatch" style="background:#FFF9E6" data-name="y-50"></div>
+            <div class="swatch" style="background:#FFD54D" data-name="y-300"></div>
+            <div class="swatch" style="background:#FFB800" data-name="y-500"></div>
+            <div class="swatch" style="background:#B38000" data-name="y-700"></div>
+            <div class="swatch" style="background:#4D3700" data-name="y-900"></div>
+            <div class="swatch" style="background:#FAFAFA" data-name="n-50"></div>
+            <div class="swatch" style="background:#E0E0E0" data-name="n-300"></div>
+            <div class="swatch" style="background:#757575" data-name="n-600"></div>
+            <div class="swatch" style="background:#2E2E2E" data-name="n-800"></div>
+            <div class="swatch" style="background:#0A0A0A" data-name="n-950"></div>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:var(--fg-subtle);letter-spacing:0.04em">
+            Hover nos swatches para ver os tokens
+          </div>
+        </div>
+
+        <!-- Tile 2: Tipografia -->
+        <div class="preview-tile">
+          <div class="tile-label">
+            <span>Type scale</span>
+            <span class="count">Kufam + DM Sans</span>
+          </div>
+          <div class="preview-type">
+            <div class="type-row">
+              <div class="sample display-sample">Display</div>
+              <div class="meta">40 / 700</div>
+            </div>
+            <div class="type-row">
+              <div class="sample heading-sample">Heading</div>
+              <div class="meta">20 / 700</div>
+            </div>
+            <div class="type-row">
+              <div class="sample body-sample">Texto corpo padrão da aplicação.</div>
+              <div class="meta">14 / 400</div>
+            </div>
+            <div class="type-row">
+              <div class="sample label-sample">Label · Microcopy</div>
+              <div class="meta">11 / 600</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tile 3: Component live -->
+        <div class="preview-tile">
+          <div class="tile-label">
+            <span>Component</span>
+            <span class="count">Card · Hover</span>
+          </div>
+          <div class="preview-component">
+            <div class="live-card">
+              <div class="live-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              </div>
+              <div>
+                <div class="live-card-title">Aprovação imediata</div>
+                <div class="live-card-desc">Análise automatizada e resposta em segundos, sem burocracia.</div>
+              </div>
+              <button class="live-button" type="button">
+                Saiba mais
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== FILOSOFIA ============== -->
+    <section class="section" id="filosofia">
+      <span class="eyebrow">01 · Visão geral</span>
+      <h2 class="h2" style="margin-top:0">Filosofia</h2>
+      <p class="lead">Cinco princípios que guiam toda decisão de design no Parcele Aqui.</p>
+
+      <h3 class="h3">1. Confiança antes de conversão</h3>
+      <p class="p">Somos fintech. O usuário precisa <strong>sentir segurança</strong> antes de clicar. Visual transmite institucionalidade — 25 anos de Potencial Tecnologia, parceria Cielo, clientes como Banco do Brasil — sem parecer engessado.</p>
+
+      <h3 class="h3">2. Clareza acima de criatividade</h3>
+      <p class="p">Linguagem direta, hierarquia óbvia, próximos passos sempre visíveis. Se o usuário precisa pensar <em>"o que faço agora?"</em>, falhamos.</p>
+
+      <h3 class="h3">3. Educação financeira como tom</h3>
+      <p class="p">Nossa voz não vende crédito — <strong>oferece fôlego de caixa</strong>. Toda escolha visual reforça que somos aliado financeiro, suporte consultivo, não vendedor de empréstimo.</p>
+
+      <h3 class="h3">4. Sistema-first, não tela-first</h3>
+      <p class="p">Toda nova LP é <strong>remix de componentes</strong>, não desenho do zero. Se algo aparece duas vezes, vira componente. Se aparece três, vira variant.</p>
+
+      <h3 class="h3">5. Acessibilidade não é opcional</h3>
+      <p class="p"><strong>WCAG AA mínimo</strong> em tudo. Contraste validado, foco visível, navegação por teclado, leitores de tela. Não é extra — é base.</p>
+    </section>
+
+    <!-- ============== MISSÃO E VOZ ============== -->
+    <section class="section" id="missao">
+      <span class="eyebrow">02 · DNA</span>
+      <h2 class="h2">Missão e voz</h2>
+
+      <div class="quote">
+        <p class="quote-text">Transformar obrigações financeiras imediatas em fôlego de caixa através do parcelamento inteligente.</p>
+        <p class="quote-author">— Missão Parcele Aqui</p>
+      </div>
+
+      <p class="p">Essa é a frase que carregamos em cada decisão. Não é slogan de marketing — é o filtro que aplicamos a todo headline, todo CTA, toda imagem. Se uma peça não comunica <strong>"transformação de pressão em respiro"</strong>, ela não é Parcele Aqui.</p>
+
+      <h3 class="h3">Pilar educativo</h3>
+      <p class="p">Toda comunicação atua como suporte consultivo e educação financeira, focando em <strong>"ajuda"</strong> e não apenas <strong>"crédito"</strong>. Não somos um produto que vende endividamento — somos uma ferramenta que organiza obrigações.</p>
+
+      <h3 class="h3">Tom de voz</h3>
+      <p class="p">Quatro adjetivos definem nossa voz:</p>
+      <ul class="list">
+        <li><strong>Profissional</strong> — somos uma fintech séria, com 25 anos de tecnologia por trás. Linguagem precisa.</li>
+        <li><strong>Consultivo</strong> — orientamos, não empurramos. Antes de oferecer, entendemos.</li>
+        <li><strong>Empático</strong> — sabemos que ninguém parcela por hobby. Reconhecemos a pressão antes de oferecer a solução.</li>
+        <li><strong>Descomplicador</strong> — termos técnicos do mercado financeiro são traduzidos. Burocracia é eliminada do discurso.</li>
+      </ul>
+    </section>
+
+    <!-- ============== AUTORIDADE ============== -->
+    <section class="section" id="autoridade">
+      <span class="eyebrow">03 · Chancela</span>
+      <h2 class="h2">Autoridade · Potencial Tecnologia</h2>
+      <p class="lead">O Parcele Aqui é uma solução desenvolvida pela Potencial Tecnologia. Essa relação não é detalhe — é nosso principal argumento de segurança.</p>
+
+      <p class="p">Em B2B (especialmente alto envolvimento — contadores, imobiliárias, instituições educacionais), <strong>a autoridade da Potencial Tecnologia precisa estar visível</strong>. É ela que sustenta a percepção de "instituição financeira robusta por trás da marca".</p>
+
+      <h3 class="h3">Quando enfatizar</h3>
+      <ul class="list">
+        <li><strong>Hero de LPs B2B</strong> — chip ou linha de credibilidade sob a headline ("Desenvolvido pela Potencial Tecnologia")</li>
+        <li><strong>Seções de segurança</strong> — sempre nominal, com 25 anos de mercado e clientes (BB, Bradesco, Itaú)</li>
+        <li><strong>Footer</strong> — assinatura institucional permanente</li>
+        <li><strong>Material whitelabel</strong> — onde o parceiro precisa explicar a chancela tecnológica</li>
+      </ul>
+
+      <h3 class="h3">Argumentos padrão</h3>
+      <div class="persona-grid">
+        <div class="persona-card">
+          <div class="persona-icon">🛡️</div>
+          <div class="persona-name">Segurança bancária</div>
+          <p class="card-desc" style="margin-top:8px">Infraestrutura certificada, parceria Cielo como adquirente oficial, criptografia ponta a ponta.</p>
+        </div>
+        <div class="persona-card">
+          <div class="persona-icon">📜</div>
+          <div class="persona-name">25 anos de mercado</div>
+          <p class="card-desc" style="margin-top:8px">Atendendo Banco do Brasil, Bradesco, Itaú, Western Union, Detran e Poupatempo.</p>
+        </div>
+        <div class="persona-card">
+          <div class="persona-icon">⚙️</div>
+          <div class="persona-name">100% digital, 24/7</div>
+          <p class="card-desc" style="margin-top:8px">Operação ininterrupta, processamento automatizado, alta disponibilidade.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== ARQUITETURA ============== -->
+    <section class="section" id="arquitetura">
+      <span class="eyebrow">04 · Estrutura</span>
+      <h2 class="h2">Arquitetura de tokens</h2>
+      <p class="lead">Adotamos o padrão multi-camada da indústria — separação clara entre valores brutos, significados de uso e aplicação em componentes.</p>
+
+      <div class="architecture">
+        <div class="arch-layer">
+          <div class="arch-num">L1</div>
+          <div class="arch-info">
+            <div class="arch-title">Primitivos · Reference</div>
+            <div class="arch-desc">Valores brutos. Cores, tamanhos, números. <strong>Nunca usar diretamente</strong> nas telas — apenas como base.</div>
+          </div>
+          <div class="arch-code">y-500 = #FFB800</div>
+        </div>
+        <div class="arch-arrow">↓</div>
+        <div class="arch-layer">
+          <div class="arch-num">L2</div>
+          <div class="arch-info">
+            <div class="arch-title">Semânticos · System</div>
+            <div class="arch-desc">Significado de uso. <strong>É aqui que se trabalha</strong> ao construir telas. Apontam para primitivos.</div>
+          </div>
+          <div class="arch-code">bg.brand → y-500</div>
+        </div>
+        <div class="arch-arrow">↓</div>
+        <div class="arch-layer">
+          <div class="arch-num">L3</div>
+          <div class="arch-info">
+            <div class="arch-title">Componentes · Component</div>
+            <div class="arch-desc">Específicos por componente. Apontam para semânticos. Usados <strong>dentro de cada componente</strong>.</div>
+          </div>
+          <div class="arch-code">button.bg → bg.brand</div>
+        </div>
+      </div>
+
+      <div class="callout callout-info">
+        <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <div class="callout-content">
+          <strong>Por que essa arquitetura importa?</strong>
+          <p>Quando trocarmos a cor primária amarela para outra (V2 com cor por vertical), mudamos em <strong>um único lugar</strong> (camada 1) e tudo se propaga. Sem isso, viraria caçada por todos os lugares onde tem amarelo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== LOGO ============== -->
+    <section class="section" id="logo">
+      <span class="eyebrow">05 · Marca</span>
+      <h2 class="h2">Logo</h2>
+      <p class="lead">A marca do Parcele Aqui combina um símbolo expressivo (mark) com wordmark sans-serif. O símbolo dialoga com a ideia de "marcar um lugar" — pin de geolocalização — e com folha/papel financeiro.</p>
+
+      <div class="logo-board">
+        <div class="logo-main">
+          <img id="logo-main" alt="Parcele Aqui" />
+        </div>
+        <div class="logo-side">
+          <div class="logo-variant brand">
+            <img id="logo-brand" alt="Parcele Aqui sobre amarelo" />
+            <span class="logo-variant-label">Sobre brand</span>
+          </div>
+          <div class="logo-variant dark">
+            <img id="logo-dark" alt="Parcele Aqui sobre escuro" />
+            <span class="logo-variant-label">Sobre dark</span>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="h3">Construção e cores</h3>
+      <ul class="list">
+        <li><strong>Mark amarelo:</strong> <code class="inline">#FFB800</code> (yellow-500)</li>
+        <li><strong>Mark escuro:</strong> <code class="inline">#0A0A0A</code> (neutral-950)</li>
+        <li><strong>Wordmark:</strong> sans-serif geométrica, peso bold, all-lowercase, sem espaço entre "parcele" e "aqui"</li>
+        <li><strong>Área de respiro mínima:</strong> equivalente à altura do mark em todos os lados</li>
+      </ul>
+
+      <h3 class="h3">Don'ts críticos</h3>
+      <div class="do-dont">
+        <div class="do-dont-card do">
+          <span class="do-dont-label">✓ Faça</span>
+          <p>Use o logo em alto contraste com o fundo. Mantenha a área de respiro. Use as cores oficiais. Aplique em SVG sempre que possível.</p>
+        </div>
+        <div class="do-dont-card dont">
+          <span class="do-dont-label">✗ Não faça</span>
+          <p>Não esticar ou deformar. Não recolorir o wordmark com cores não-oficiais. Não aplicar sombras ou contornos. Não rotacionar. Não usar sobre fundos com baixo contraste.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== TOM DE VOZ ============== -->
+    <section class="section" id="tom">
+      <span class="eyebrow">06 · Marca</span>
+      <h2 class="h2">Tom de voz aplicado</h2>
+      <p class="lead">A voz do Parcele Aqui em prática. Comparações antes/depois extraídas do Manual de UX Writing.</p>
+
+      <h3 class="h3">Genérico vs. Estratégico</h3>
+      <div class="do-dont">
+        <div class="do-dont-card dont">
+          <span class="do-dont-label">✗ Genérico</span>
+          <p style="font-style: italic;">"Pague seu boleto aqui."</p>
+        </div>
+        <div class="do-dont-card do">
+          <span class="do-dont-label">✓ Estratégico</span>
+          <p style="font-style: italic;">"Descomplique seu pagamento e mantenha seu fluxo de caixa saudável. Parcele com a segurança da Potencial Tecnologia."</p>
+        </div>
+      </div>
+
+      <h3 class="h3">Vocabulário recomendado</h3>
+      <div class="do-dont">
+        <div class="do-dont-card do">
+          <span class="do-dont-label">✓ Use</span>
+          <p>Fôlego de caixa · Organizar · Descomplicar · Aliado · Respiro financeiro · Tranquilidade · Planejamento · Inteligência · Segurança · Agilidade</p>
+        </div>
+        <div class="do-dont-card dont">
+          <span class="do-dont-label">✗ Evite</span>
+          <p>Endividamento · Crédito (sozinho, sem contexto) · Empréstimo · Dívida · Urgência (cria pânico) · Última chance · Aprovado em 5 minutos (clichê de fintech)</p>
+        </div>
+      </div>
+
+      <h3 class="h3">Princípios de microcopy</h3>
+      <ul class="list">
+        <li><strong>Single Choice</strong> — uma ação principal por tela. Reduz carga cognitiva.</li>
+        <li><strong>Verbo + benefício</strong> — CTAs com verbo no início e benefício explícito ("Quero organizar minhas contas" &gt; "Continuar")</li>
+        <li><strong>Erros humanos</strong> — em vez de "Erro 400", "Algo deu errado. Tente novamente em alguns segundos."</li>
+        <li><strong>Confirmar com clareza</strong> — toda ação importante recebe confirmação visual + textual</li>
+      </ul>
+    </section>
+
+    <!-- ============== PERSONAS ============== -->
+    <section class="section" id="personas">
+      <span class="eyebrow">07 · Estratégia</span>
+      <h2 class="h2">Personas e nichos</h2>
+      <p class="lead">Cada vertical tem dor, vocabulário e abordagem específicos. Headlines genéricas não funcionam.</p>
+
+      <div class="persona-grid">
+        <div class="persona-card">
+          <div class="persona-icon">📊</div>
+          <div class="persona-name">Contabilidades</div>
+          <div class="persona-segment">B2B · Alto envolvimento</div>
+          <div class="persona-section">
+            <div class="persona-section-label">Dor</div>
+            <div class="persona-section-text">Inadimplência e fluxo de caixa do cliente PJ.</div>
+          </div>
+          <div class="persona-section">
+            <div class="persona-section-label">Solução</div>
+            <div class="persona-section-text">Parcelamento de guias (DAS, GPS, impostos) para manter conformidade.</div>
+          </div>
+          <div class="persona-section">
+            <div class="persona-section-label">Abordagem</div>
+            <div class="persona-section-text">Contador como aliado estratégico que oferece "respiro" financeiro.</div>
+          </div>
+        </div>
+
+        <div class="persona-card">
+          <div class="persona-icon">🏠</div>
+          <div class="persona-name">Imobiliárias</div>
+          <div class="persona-segment">B2B · Médio envolvimento</div>
+          <div class="persona-section">
+            <div class="persona-section-label">Dor</div>
+            <div class="persona-section-text">Custos de entrada (caução, taxas) e atrasos de aluguel.</div>
+          </div>
+          <div class="persona-section">
+            <div class="persona-section-label">Solução</div>
+            <div class="persona-section-text">Parcelar taxas iniciais e débitos para facilitar a jornada do locatário.</div>
+          </div>
+          <div class="persona-section">
+            <div class="persona-section-label">Abordagem</div>
+            <div class="persona-section-text">Fluidez na transação e garantia de recebimento para o proprietário.</div>
+          </div>
+        </div>
+
+        <div class="persona-card">
+          <div class="persona-icon">🎓</div>
+          <div class="persona-name">Grupos Educacionais</div>
+          <div class="persona-segment">B2B · Alto envolvimento</div>
+          <div class="persona-section">
+            <div class="persona-section-label">Dor</div>
+            <div class="persona-section-text">Evasão escolar por inadimplência e custos de matrícula/materiais.</div>
+          </div>
+          <div class="persona-section">
+            <div class="persona-section-label">Solução</div>
+            <div class="persona-section-text">Parcelamento de mensalidades e pacotes anuais.</div>
+          </div>
+          <div class="persona-section">
+            <div class="persona-section-label">Abordagem</div>
+            <div class="persona-section-text">Investimento no futuro e continuidade dos estudos sem interrupções.</div>
+          </div>
+        </div>
+
+        <div class="persona-card">
+          <div class="persona-icon">💼</div>
+          <div class="persona-name">B2B Mar Aberto</div>
+          <div class="persona-segment">B2B · Variável</div>
+          <div class="persona-section">
+            <div class="persona-section-label">Dor</div>
+            <div class="persona-section-text">Inadimplência geral, fluxo de caixa, perda de vendas por falta de flexibilidade.</div>
+          </div>
+          <div class="persona-section">
+            <div class="persona-section-label">Solução</div>
+            <div class="persona-section-text">Plataforma genérica adaptável a qualquer setor.</div>
+          </div>
+          <div class="persona-section">
+            <div class="persona-section-label">Abordagem</div>
+            <div class="persona-section-text">Growth, retenção e segurança no recebimento (autoridade Potencial).</div>
+          </div>
+        </div>
+
+        <div class="persona-card">
+          <div class="persona-icon">👤</div>
+          <div class="persona-name">B2C Final</div>
+          <div class="persona-segment">B2C · Baixo envolvimento</div>
+          <div class="persona-section">
+            <div class="persona-section-label">Dor</div>
+            <div class="persona-section-text">Boleto vence antes do salário, imprevistos, orçamento comprometido.</div>
+          </div>
+          <div class="persona-section">
+            <div class="persona-section-label">Solução</div>
+            <div class="persona-section-text">Parcelamento direto pela plataforma, em até 12x no cartão.</div>
+          </div>
+          <div class="persona-section">
+            <div class="persona-section-label">Abordagem</div>
+            <div class="persona-section-text">Conveniência, parcelas que cabem no bolso, gestão inteligente do orçamento.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== FUNIL ============== -->
+    <section class="section" id="funil">
+      <span class="eyebrow">08 · Estratégia</span>
+      <h2 class="h2">Estrutura GTM</h2>
+      <p class="lead">Como conteúdo, copy e UI mudam conforme o estágio do funil. O mesmo argumento ganha tom diferente em cada canal.</p>
+
+      <div class="funnel">
+        <div class="funnel-stage top">
+          <span class="funnel-label">Topo · Atração B2B</span>
+          <div class="funnel-content">
+            <h4>Captação de parceiros</h4>
+            <p>Foco em autoridade da Potencial Tecnologia + redução de inadimplência. Linguagem corporativa, dados de mercado, cases.</p>
+            <div class="funnel-meta">
+              <span class="funnel-tag">LinkedIn Ads</span>
+              <span class="funnel-tag">Cold mail</span>
+              <span class="funnel-tag">Google Ads search</span>
+              <span class="funnel-tag">SEO B2B</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="funnel-stage mid">
+          <span class="funnel-label">Meio · Onboarding</span>
+          <div class="funnel-content">
+            <h4>Educação do parceiro whitelabel</h4>
+            <p>Parceiro aprende a oferecer o parcelamento como "benefício consultivo". Tom educativo, kit de marketing, scripts prontos.</p>
+            <div class="funnel-meta">
+              <span class="funnel-tag">Email boas-vindas</span>
+              <span class="funnel-tag">Kit de marketing</span>
+              <span class="funnel-tag">Documentação</span>
+              <span class="funnel-tag">Treinamento</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="funnel-stage bot">
+          <span class="funnel-label">Fundo · Conversão B2C</span>
+          <div class="funnel-content">
+            <h4>Descomplicação para o cliente final</h4>
+            <p>Foco em fôlego de caixa para o pai do aluno, locatário ou empresário. Linguagem simples, urgência saudável (não pânico).</p>
+            <div class="funnel-meta">
+              <span class="funnel-tag">WhatsApp</span>
+              <span class="funnel-tag">Rodapé de boletos</span>
+              <span class="funnel-tag">Checkout</span>
+              <span class="funnel-tag">Push e SMS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ============== CORES ============== -->
+    <section class="section" id="cores">
+      <span class="eyebrow">09 · Foundations</span>
+      <h2 class="h2">Cores</h2>
+      <p class="lead">Paleta organizada em três níveis. V1 prioriza amarelo unificado para todas as LPs B2B; verde Potencial é institucional; azul Negócios fica reservado para evolução V2.</p>
+
+      <h3 class="h3">Yellow · Acento principal V1</h3>
+      <div class="brand-color">
+        <div class="brand-color-swatch" style="background: var(--y-500);">
+          <span class="label">y-500</span>
+        </div>
+        <div class="brand-color-info">
+          <h4>Yellow Parcele Aqui</h4>
+          <p>Acento principal de todas as LPs B2B na V1. Usado em CTAs, destaques pontuais, ondas decorativas e elementos vibrantes.</p>
+          <div class="brand-color-meta">
+            <div><span>HEX</span><span>#FFB800</span></div>
+            <div><span>RGB</span><span>255, 184, 0</span></div>
+            <div><span>HSL</span><span>43°, 100%, 50%</span></div>
+            <div><span>Token</span><span>bg.brand</span></div>
+          </div>
+        </div>
+      </div>
+
+      <h4 class="h4">Escala completa Yellow</h4>
+      <div class="color-scale">
+        <div class="scale-item"><div class="scale-color" style="background:#FFF9E6"></div><div class="scale-meta"><div class="scale-name">y-50</div><div class="scale-hex">#FFF9E6</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#FFEFB3"></div><div class="scale-meta"><div class="scale-name">y-100</div><div class="scale-hex">#FFEFB3</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#FFE380"></div><div class="scale-meta"><div class="scale-name">y-200</div><div class="scale-hex">#FFE380</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#FFD54D"></div><div class="scale-meta"><div class="scale-name">y-300</div><div class="scale-hex">#FFD54D</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#FFC61A"></div><div class="scale-meta"><div class="scale-name">y-400</div><div class="scale-hex">#FFC61A</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#FFB800"></div><div class="scale-meta"><div class="scale-name">y-500 ★</div><div class="scale-hex">#FFB800</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#E6A600"></div><div class="scale-meta"><div class="scale-name">y-600</div><div class="scale-hex">#E6A600</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#B38000"></div><div class="scale-meta"><div class="scale-name">y-700</div><div class="scale-hex">#B38000</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#805C00"></div><div class="scale-meta"><div class="scale-name">y-800</div><div class="scale-hex">#805C00</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#4D3700"></div><div class="scale-meta"><div class="scale-name">y-900</div><div class="scale-hex">#4D3700</div></div></div>
+      </div>
+
+      <h3 class="h3">Green · Autoridade Potencial</h3>
+      <div class="brand-color">
+        <div class="brand-color-swatch" style="background: var(--g-500);">
+          <span class="label">g-500</span>
+        </div>
+        <div class="brand-color-info">
+          <h4>Green Potencial</h4>
+          <p>Exclusivo de seções institucionais (autoridade Potencial Tecnologia). Não usar em UI padrão — confunde com sucesso/aprovação.</p>
+          <div class="brand-color-meta">
+            <div><span>HEX</span><span>#2E7D32</span></div>
+            <div><span>RGB</span><span>46, 125, 50</span></div>
+            <div><span>Token</span><span>bg.authority</span></div>
+          </div>
+        </div>
+      </div>
+
+      <h4 class="h4">Escala completa Green</h4>
+      <div class="color-scale">
+        <div class="scale-item"><div class="scale-color" style="background:#E8F5E9"></div><div class="scale-meta"><div class="scale-name">g-50</div><div class="scale-hex">#E8F5E9</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#C8E6C9"></div><div class="scale-meta"><div class="scale-name">g-100</div><div class="scale-hex">#C8E6C9</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#A5D6A7"></div><div class="scale-meta"><div class="scale-name">g-200</div><div class="scale-hex">#A5D6A7</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#81C784"></div><div class="scale-meta"><div class="scale-name">g-300</div><div class="scale-hex">#81C784</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#66BB6A"></div><div class="scale-meta"><div class="scale-name">g-400</div><div class="scale-hex">#66BB6A</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#2E7D32"></div><div class="scale-meta"><div class="scale-name">g-500 ★</div><div class="scale-hex">#2E7D32</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#1B5E20"></div><div class="scale-meta"><div class="scale-name">g-600</div><div class="scale-hex">#1B5E20</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#145017"></div><div class="scale-meta"><div class="scale-name">g-700</div><div class="scale-hex">#145017</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#0D3F0F"></div><div class="scale-meta"><div class="scale-name">g-800</div><div class="scale-hex">#0D3F0F</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#062E07"></div><div class="scale-meta"><div class="scale-name">g-900</div><div class="scale-hex">#062E07</div></div></div>
+      </div>
+
+      <h3 class="h3">Neutrals · Textos, fundos, bordas</h3>
+      <div class="color-scale">
+        <div class="scale-item"><div class="scale-color" style="background:#FFFFFF;border-bottom:1px solid #eee"></div><div class="scale-meta"><div class="scale-name">n-0</div><div class="scale-hex">#FFFFFF</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#FAFAFA"></div><div class="scale-meta"><div class="scale-name">n-50</div><div class="scale-hex">#FAFAFA</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#F5F5F5"></div><div class="scale-meta"><div class="scale-name">n-100</div><div class="scale-hex">#F5F5F5</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#EEEEEE"></div><div class="scale-meta"><div class="scale-name">n-200</div><div class="scale-hex">#EEEEEE</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#E0E0E0"></div><div class="scale-meta"><div class="scale-name">n-300</div><div class="scale-hex">#E0E0E0</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#BDBDBD"></div><div class="scale-meta"><div class="scale-name">n-400</div><div class="scale-hex">#BDBDBD</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#9E9E9E"></div><div class="scale-meta"><div class="scale-name">n-500</div><div class="scale-hex">#9E9E9E</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#757575"></div><div class="scale-meta"><div class="scale-name">n-600</div><div class="scale-hex">#757575</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#424242"></div><div class="scale-meta"><div class="scale-name">n-700</div><div class="scale-hex">#424242</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#2E2E2E"></div><div class="scale-meta"><div class="scale-name">n-800 ★</div><div class="scale-hex">#2E2E2E</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#1A1A1A"></div><div class="scale-meta"><div class="scale-name">n-900</div><div class="scale-hex">#1A1A1A</div></div></div>
+        <div class="scale-item"><div class="scale-color" style="background:#0A0A0A"></div><div class="scale-meta"><div class="scale-name">n-950</div><div class="scale-hex">#0A0A0A</div></div></div>
+      </div>
+
+      <h3 class="h3">Tokens semânticos · Background</h3>
+      <p class="p p-muted">Estes são os tokens que você <strong>realmente usa</strong> nas telas. Apontam para os primitivos acima.</p>
+      <div class="token-table">
+        <div class="token-row"><div class="token-preview" style="background:#FFFFFF"></div><div class="token-name">bg</div><div class="token-value">→ n-0</div><div class="token-usage">Fundo principal de páginas</div></div>
+        <div class="token-row"><div class="token-preview" style="background:#FAFAFA"></div><div class="token-name">bg-subtle</div><div class="token-value">→ n-50</div><div class="token-usage">Cards, elevações sutis, demos</div></div>
+        <div class="token-row"><div class="token-preview" style="background:#F5F5F5"></div><div class="token-name">bg-muted</div><div class="token-value">→ n-100</div><div class="token-usage">Seções alternadas, divisores</div></div>
+        <div class="token-row"><div class="token-preview" style="background:#0A0A0A"></div><div class="token-name">bg-inverse</div><div class="token-value">→ n-950</div><div class="token-usage">Seções escuras (Como funciona)</div></div>
+        <div class="token-row"><div class="token-preview" style="background:#FFB800"></div><div class="token-name">bg-brand</div><div class="token-value">→ y-500</div><div class="token-usage">CTAs primários, destaques</div></div>
+        <div class="token-row"><div class="token-preview" style="background:#FFF9E6"></div><div class="token-name">bg-brand-subtle</div><div class="token-value">→ y-50</div><div class="token-usage">Highlights leves, badges</div></div>
+        <div class="token-row"><div class="token-preview" style="background:#2E7D32"></div><div class="token-name">bg-authority</div><div class="token-value">→ g-500</div><div class="token-usage">Seção Potencial Tecnologia</div></div>
+      </div>
+
+      <h3 class="h3">Tokens semânticos · Foreground (texto)</h3>
+      <div class="token-table">
+        <div class="token-row"><div class="token-preview-text" style="background:#FFFFFF;color:#1A1A1A;border:1px solid #eee">Aa</div><div class="token-name">fg</div><div class="token-value">→ n-900</div><div class="token-usage">Texto corpo padrão, títulos</div></div>
+        <div class="token-row"><div class="token-preview-text" style="background:#FFFFFF;color:#757575;border:1px solid #eee">Aa</div><div class="token-name">fg-muted</div><div class="token-value">→ n-600</div><div class="token-usage">Texto secundário, descrições</div></div>
+        <div class="token-row"><div class="token-preview-text" style="background:#FFFFFF;color:#9E9E9E;border:1px solid #eee">Aa</div><div class="token-name">fg-subtle</div><div class="token-value">→ n-500</div><div class="token-usage">Legendas, metadados</div></div>
+        <div class="token-row"><div class="token-preview-text" style="background:#0A0A0A;color:#FFFFFF">Aa</div><div class="token-name">fg-inverse</div><div class="token-value">→ n-0</div><div class="token-usage">Texto em fundo escuro</div></div>
+        <div class="token-row"><div class="token-preview-text" style="background:#FFB800;color:#1A1A1A">Aa</div><div class="token-name">fg-on-brand</div><div class="token-value">→ n-900</div><div class="token-usage">Texto sobre amarelo (sempre escuro!)</div></div>
+      </div>
+
+      <div class="callout callout-warning">
+        <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div class="callout-content">
+          <strong>Atenção crítica de contraste</strong>
+          <p>Texto branco (#FFFFFF) sobre amarelo (#FFB800) <strong>NÃO passa WCAG AA</strong>. Sempre use <code class="inline">n-900</code> ou <code class="inline">n-800</code> sobre amarelo. Validar todas as combinações com plugin Stark no Figma antes de aprovar layouts.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== TIPOGRAFIA ============== -->
+    <section class="section" id="tipografia">
+      <span class="eyebrow">10 · Foundations</span>
+      <h2 class="h2">Tipografia</h2>
+      <p class="lead">Duas famílias formam o DNA tipográfico do Parcele Aqui: <strong>Kufam</strong> traz personalidade aos títulos, <strong>DM Sans</strong> entrega legibilidade impecável no corpo.</p>
+
+      <h3 class="h3">Famílias</h3>
+
+      <div class="type-spec">
+        <div class="type-sample" style="font-size:36px;line-height:1.1;letter-spacing:-0.01em">Kufam — Display</div>
+        <div class="type-info">
+          <div class="row"><span>Família</span><strong>Kufam</strong></div>
+          <div class="row"><span>Uso</span><strong>Headlines, títulos</strong></div>
+          <div class="row"><span>Pesos</span><strong>400 / 500 / 700 / 900</strong></div>
+          <div class="row"><span>Source</span><strong>Google Fonts</strong></div>
+        </div>
+      </div>
+
+      <div class="type-spec">
+        <div class="type-sample body" style="font-size:18px">DM Sans — Texto, parágrafos, UI e elementos de interface</div>
+        <div class="type-info">
+          <div class="row"><span>Família</span><strong>DM Sans</strong></div>
+          <div class="row"><span>Uso</span><strong>Body, UI, botões</strong></div>
+          <div class="row"><span>Pesos</span><strong>400 / 500 / 600 / 700</strong></div>
+          <div class="row"><span>Source</span><strong>Google Fonts</strong></div>
+        </div>
+      </div>
+
+      <h3 class="h3">Type scale · Display (Kufam)</h3>
+      <p class="p p-muted">Para headlines de hero, títulos institucionais e momentos de alto impacto.</p>
+
+      <div class="type-spec">
+        <div class="type-sample" style="font-size:60px;line-height:1.05;letter-spacing:-0.02em">Display XL</div>
+        <div class="type-info">
+          <div class="row"><span>Token</span><strong>display-xl</strong></div>
+          <div class="row"><span>Size</span><strong>60 / 68</strong></div>
+          <div class="row"><span>Tracking</span><strong>-0.02em</strong></div>
+          <div class="row"><span>Weight</span><strong>700 Bold</strong></div>
+        </div>
+      </div>
+
+      <div class="type-spec">
+        <div class="type-sample" style="font-size:48px;line-height:1.1;letter-spacing:-0.02em">Display LG</div>
+        <div class="type-info">
+          <div class="row"><span>Token</span><strong>display-lg</strong></div>
+          <div class="row"><span>Size</span><strong>48 / 56</strong></div>
+          <div class="row"><span>Tracking</span><strong>-0.02em</strong></div>
+          <div class="row"><span>Weight</span><strong>700 Bold</strong></div>
+        </div>
+      </div>
+
+      <div class="type-spec">
+        <div class="type-sample" style="font-size:40px;line-height:1.2;letter-spacing:-0.01em">Display MD ★</div>
+        <div class="type-info">
+          <div class="row"><span>Token</span><strong>display-md</strong></div>
+          <div class="row"><span>Size</span><strong>40 / 48</strong></div>
+          <div class="row"><span>Tracking</span><strong>-0.01em</strong></div>
+          <div class="row"><span>Weight</span><strong>700 Bold</strong></div>
+          <div class="star">★ Tamanho atual da headline hero (validado no Figma)</div>
+        </div>
+      </div>
+
+      <h3 class="h3">Type scale · Heading (Kufam)</h3>
+      <div class="type-spec">
+        <div class="type-sample" style="font-size:32px;line-height:1.2">Heading XL</div>
+        <div class="type-info">
+          <div class="row"><span>Token</span><strong>heading-xl</strong></div>
+          <div class="row"><span>Size</span><strong>32 / 40</strong></div>
+          <div class="row"><span>Weight</span><strong>700 Bold</strong></div>
+        </div>
+      </div>
+
+      <div class="type-spec">
+        <div class="type-sample" style="font-size:28px;line-height:1.25">Heading LG</div>
+        <div class="type-info">
+          <div class="row"><span>Token</span><strong>heading-lg</strong></div>
+          <div class="row"><span>Size</span><strong>28 / 36</strong></div>
+          <div class="row"><span>Weight</span><strong>700 Bold</strong></div>
+        </div>
+      </div>
+
+      <div class="type-spec">
+        <div class="type-sample" style="font-size:24px;line-height:1.3">Heading MD</div>
+        <div class="type-info">
+          <div class="row"><span>Token</span><strong>heading-md</strong></div>
+          <div class="row"><span>Size</span><strong>24 / 32</strong></div>
+          <div class="row"><span>Weight</span><strong>700 Bold</strong></div>
+        </div>
+      </div>
+
+      <div class="type-spec">
+        <div class="type-sample" style="font-size:20px;line-height:1.35">Heading SM</div>
+        <div class="type-info">
+          <div class="row"><span>Token</span><strong>heading-sm</strong></div>
+          <div class="row"><span>Size</span><strong>20 / 28</strong></div>
+          <div class="row"><span>Weight</span><strong>700 Bold</strong></div>
+        </div>
+      </div>
+
+      <h3 class="h3">Type scale · Body (DM Sans)</h3>
+
+      <div class="type-spec">
+        <div class="type-sample body" style="font-size:20px;line-height:1.5">Body XL — Subtítulo de hero, parágrafos de destaque</div>
+        <div class="type-info">
+          <div class="row"><span>Token</span><strong>body-xl</strong></div>
+          <div class="row"><span>Size</span><strong>20 / 30</strong></div>
+          <div class="row"><span>Weight</span><strong>400 Regular</strong></div>
+        </div>
+      </div>
+
+      <div class="type-spec">
+        <div class="type-sample body" style="font-size:18px;line-height:1.55">Body LG — Parágrafos importantes, descrições destacadas</div>
+        <div class="type-info">
+          <div class="row"><span>Token</span><strong>body-lg</strong></div>
+          <div class="row"><span>Size</span><strong>18 / 28</strong></div>
+          <div class="row"><span>Weight</span><strong>400 Regular</strong></div>
+        </div>
+      </div>
+
+      <div class="type-spec">
+        <div class="type-sample body" style="font-size:16px;line-height:1.5">Body MD ★ — Texto padrão de toda a aplicação</div>
+        <div class="type-info">
+          <div class="row"><span>Token</span><strong>body-md</strong></div>
+          <div class="row"><span>Size</span><strong>16 / 24</strong></div>
+          <div class="row"><span>Weight</span><strong>400 Regular</strong></div>
+          <div class="star">★ Tamanho atual do body (validado no Figma)</div>
+        </div>
+      </div>
+
+      <div class="type-spec">
+        <div class="type-sample body" style="font-size:14px;line-height:1.55">Body SM — Texto secundário, legendas longas</div>
+        <div class="type-info">
+          <div class="row"><span>Token</span><strong>body-sm</strong></div>
+          <div class="row"><span>Size</span><strong>14 / 22</strong></div>
+          <div class="row"><span>Weight</span><strong>400 Regular</strong></div>
+        </div>
+      </div>
+
+      <div class="type-spec">
+        <div class="type-sample label" style="font-size:14px">LABEL · Botões, badges, microcopy</div>
+        <div class="type-info">
+          <div class="row"><span>Token</span><strong>label-md</strong></div>
+          <div class="row"><span>Size</span><strong>14</strong></div>
+          <div class="row"><span>Weight</span><strong>600 SemiBold</strong></div>
+          <div class="row"><span>Tracking</span><strong>0.01em</strong></div>
+        </div>
+      </div>
+
+      <h3 class="h3">Regras críticas de tipografia</h3>
+      <ul class="list">
+        <li><strong>Nunca misture mais de 2 famílias</strong> — Kufam + DM Sans é o DNA. Adicionar uma terceira só com motivo muito forte.</li>
+        <li><strong>Line-height proporcional ao tamanho</strong> — Headlines: 1.1 a 1.2. Body: 1.5 a 1.6.</li>
+        <li><strong>Letter-spacing em headlines grandes</strong> — Kufam em 40px+ pede <code class="inline">-0.01em</code> ou <code class="inline">-0.02em</code>.</li>
+        <li><strong>Largura máxima de linha</strong> — Body: 65-75 caracteres. Acima disso, leitura desanda.</li>
+        <li><strong>Hierarquia por contraste, não só tamanho</strong> — Use peso (Bold vs Regular) e cor (heading vs muted).</li>
+      </ul>
+    </section>
+
+    <!-- ============== SPACING ============== -->
+    <section class="section" id="spacing">
+      <span class="eyebrow">11 · Foundations</span>
+      <h2 class="h2">Spacing</h2>
+      <p class="lead">Sistema de 4pt grid. Múltiplos de 4 garantem alinhamento pixel-perfect e harmonia visual em toda interface.</p>
+
+      <div class="spacing-scale">
+        <div class="spacing-row"><span class="spacing-name">s-1</span><span class="spacing-val">4px</span><div class="spacing-bar" style="width:4px"></div></div>
+        <div class="spacing-row"><span class="spacing-name">s-2</span><span class="spacing-val">8px</span><div class="spacing-bar" style="width:8px"></div></div>
+        <div class="spacing-row"><span class="spacing-name">s-3</span><span class="spacing-val">12px</span><div class="spacing-bar" style="width:12px"></div></div>
+        <div class="spacing-row"><span class="spacing-name">s-4</span><span class="spacing-val">16px</span><div class="spacing-bar" style="width:16px"></div></div>
+        <div class="spacing-row"><span class="spacing-name">s-5</span><span class="spacing-val">20px</span><div class="spacing-bar" style="width:20px"></div></div>
+        <div class="spacing-row"><span class="spacing-name">s-6</span><span class="spacing-val">24px</span><div class="spacing-bar" style="width:24px"></div></div>
+        <div class="spacing-row"><span class="spacing-name">s-8</span><span class="spacing-val">32px</span><div class="spacing-bar" style="width:32px"></div></div>
+        <div class="spacing-row"><span class="spacing-name">s-10</span><span class="spacing-val">40px</span><div class="spacing-bar" style="width:40px"></div></div>
+        <div class="spacing-row"><span class="spacing-name">s-12</span><span class="spacing-val">48px</span><div class="spacing-bar" style="width:48px"></div></div>
+        <div class="spacing-row"><span class="spacing-name">s-16</span><span class="spacing-val">64px</span><div class="spacing-bar" style="width:64px"></div></div>
+        <div class="spacing-row"><span class="spacing-name">s-20</span><span class="spacing-val">80px</span><div class="spacing-bar" style="width:80px"></div></div>
+        <div class="spacing-row"><span class="spacing-name">s-24</span><span class="spacing-val">96px</span><div class="spacing-bar" style="width:96px"></div></div>
+        <div class="spacing-row"><span class="spacing-name">s-32</span><span class="spacing-val">128px</span><div class="spacing-bar" style="width:128px"></div></div>
+      </div>
+
+      <h3 class="h3">Aplicação típica</h3>
+      <ul class="list">
+        <li><strong>Padding interno de cards:</strong> s-6 (24px) a s-8 (32px)</li>
+        <li><strong>Gap entre cards em grid:</strong> s-4 (16px) a s-6 (24px)</li>
+        <li><strong>Padding vertical de seções:</strong> s-16 (64px) a s-24 (96px)</li>
+        <li><strong>Margem entre título e texto:</strong> s-3 (12px) a s-4 (16px)</li>
+        <li><strong>Container max-width:</strong> 1280px com padding-x de s-6 (24px)</li>
+      </ul>
+    </section>
+
+    <!-- ============== RADIUS ============== -->
+    <section class="section" id="radius">
+      <span class="eyebrow">12 · Foundations</span>
+      <h2 class="h2">Border radius</h2>
+      <p class="lead">Curvas generosas dão sensação amigável e moderna ao Parcele Aqui — característica importante para fintech que se posiciona como aliado, não banco rígido.</p>
+
+      <div class="radius-grid">
+        <div class="radius-card"><div class="radius-demo" style="border-radius:4px"></div><div class="radius-name">r-xs</div><div class="radius-val">4px</div></div>
+        <div class="radius-card"><div class="radius-demo" style="border-radius:6px"></div><div class="radius-name">r-sm</div><div class="radius-val">6px</div></div>
+        <div class="radius-card"><div class="radius-demo" style="border-radius:8px"></div><div class="radius-name">r-md</div><div class="radius-val">8px</div></div>
+        <div class="radius-card"><div class="radius-demo" style="border-radius:12px"></div><div class="radius-name">r-lg</div><div class="radius-val">12px</div></div>
+        <div class="radius-card"><div class="radius-demo" style="border-radius:16px"></div><div class="radius-name">r-xl</div><div class="radius-val">16px</div></div>
+        <div class="radius-card"><div class="radius-demo" style="border-radius:24px"></div><div class="radius-name">r-2xl</div><div class="radius-val">24px</div></div>
+        <div class="radius-card"><div class="radius-demo" style="border-radius:9999px"></div><div class="radius-name">r-full</div><div class="radius-val">9999px</div></div>
+      </div>
+
+      <h3 class="h3">Aplicação por componente</h3>
+      <ul class="list">
+        <li><strong>Botões:</strong> r-full (formato pill) — assinatura visual</li>
+        <li><strong>Inputs:</strong> r-md (8px)</li>
+        <li><strong>Cards:</strong> r-lg (12px) a r-xl (16px)</li>
+        <li><strong>Imagens em hero:</strong> r-2xl (24px) ou orgânico</li>
+        <li><strong>Badges e tags:</strong> r-full</li>
+      </ul>
+    </section>
+
+    <!-- ============== SHADOWS ============== -->
+    <section class="section" id="shadows">
+      <span class="eyebrow">13 · Foundations</span>
+      <h2 class="h2">Sombras</h2>
+      <p class="lead">Hierarquia de elevação. Sombras criam profundidade sem peso visual, sinalizando interatividade e foco.</p>
+
+      <div class="shadow-grid">
+        <div class="shadow-card" style="box-shadow:var(--shadow-xs)"><div class="name">shadow-xs</div><div class="desc">Bordas sutis</div></div>
+        <div class="shadow-card" style="box-shadow:var(--shadow-sm)"><div class="name">shadow-sm</div><div class="desc">Cards estáticos</div></div>
+        <div class="shadow-card" style="box-shadow:var(--shadow-md)"><div class="name">shadow-md</div><div class="desc">Hover de cards</div></div>
+        <div class="shadow-card" style="box-shadow:var(--shadow-lg)"><div class="name">shadow-lg</div><div class="desc">Dropdowns</div></div>
+        <div class="shadow-card" style="box-shadow:var(--shadow-xl)"><div class="name">shadow-xl</div><div class="desc">Modais, hero</div></div>
+      </div>
+    </section>
+
+    <!-- ============== MOTION ============== -->
+    <section class="section" id="motion">
+      <span class="eyebrow">14 · Foundations</span>
+      <h2 class="h2">Motion</h2>
+      <p class="lead">Animações com propósito. Cada movimento responde a uma intenção — feedback de ação, transição de estado, ou guia de atenção.</p>
+
+      <h3 class="h3">Durações</h3>
+      <div class="token-table">
+        <div class="token-row"><div class="token-preview" style="background:#FFF9E6"></div><div class="token-name">d-fast</div><div class="token-value">120ms</div><div class="token-usage">Hover de botões, micro-feedback</div></div>
+        <div class="token-row"><div class="token-preview" style="background:#FFE380"></div><div class="token-name">d-base</div><div class="token-value">200ms</div><div class="token-usage">Padrão (cards, inputs, transições)</div></div>
+        <div class="token-row"><div class="token-preview" style="background:#FFB800"></div><div class="token-name">d-slow</div><div class="token-value">320ms</div><div class="token-usage">Modais, drawers, theme switch</div></div>
+      </div>
+
+      <h3 class="h3">Easings</h3>
+      <ul class="list">
+        <li><code class="inline">ease</code> — <code class="inline">cubic-bezier(0.4, 0, 0.2, 1)</code> — Padrão para a maioria dos casos.</li>
+        <li><code class="inline">ease-out</code> — <code class="inline">cubic-bezier(0, 0, 0.2, 1)</code> — Para animações de entrada (fade in, slide in).</li>
+      </ul>
+
+      <div class="callout callout-info">
+        <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <div class="callout-content">
+          <strong>Princípio</strong>
+          <p>Movimento serve à comunicação, não à decoração. Se uma animação não responde a uma pergunta ("o que aconteceu?", "para onde foi?", "está pronto?"), provavelmente não deveria existir.</p>
+        </div>
+      </div>
+    </section>
+    <!-- ============== BOTÕES ============== -->
+    <section class="section" id="botoes">
+      <span class="eyebrow">15 · Componentes</span>
+      <h2 class="h2">Botões</h2>
+      <p class="lead">CTAs são o ponto de conversão. Hierarquia clara: primário (uma ação dominante por seção), secundário (alternativas), ghost (ações terciárias).</p>
+
+      <h3 class="h3">Variantes</h3>
+      <div class="demo">
+        <button class="btn btn-primary">Quero uma proposta</button>
+        <button class="btn btn-secondary">Falar com especialista</button>
+        <button class="btn btn-ghost">Saber mais</button>
+        <button class="btn btn-dark">Ver como funciona</button>
+      </div>
+
+      <h3 class="h3">Tamanhos</h3>
+      <div class="demo">
+        <button class="btn btn-primary btn-sm">Pequeno</button>
+        <button class="btn btn-primary">Padrão</button>
+        <button class="btn btn-primary btn-lg">Grande</button>
+      </div>
+
+      <h3 class="h3">Especificações</h3>
+      <pre class="code"><span class="c">/* Botão primário */</span>
+<span class="p">background</span>: <span class="v">var(--bg-brand)</span>;       <span class="c">/* y-500 */</span>
+<span class="p">color</span>: <span class="v">var(--fg-on-brand)</span>;          <span class="c">/* n-900 */</span>
+<span class="p">font-family</span>: <span class="v">var(--font-sans)</span>;      <span class="c">/* DM Sans */</span>
+<span class="p">font-weight</span>: <span class="v">600</span>;                    <span class="c">/* SemiBold */</span>
+<span class="p">font-size</span>: <span class="v">14.5px</span>;
+<span class="p">padding</span>: <span class="v">10px 20px</span>;
+<span class="p">border-radius</span>: <span class="v">var(--r-full)</span>;        <span class="c">/* pill */</span>
+<span class="p">transition</span>: <span class="v">all 120ms cubic-bezier(0.4,0,0.2,1)</span>;
+
+<span class="c">/* Hover */</span>
+<span class="p">background</span>: <span class="v">var(--y-600)</span>;
+<span class="p">transform</span>: <span class="v">translateY(-1px)</span>;
+<span class="p">box-shadow</span>: <span class="v">var(--shadow-md)</span>;</pre>
+    </section>
+
+    <!-- ============== INPUTS ============== -->
+    <section class="section" id="inputs">
+      <span class="eyebrow">16 · Componentes</span>
+      <h2 class="h2">Inputs</h2>
+      <p class="lead">Formulários são pontos críticos de conversão. Estados claros, foco visível, mensagens de erro humanas.</p>
+
+      <div class="demo demo-stack">
+        <input type="text" class="input" placeholder="Seu e-mail profissional">
+        <input type="text" class="input" placeholder="Volume mensal estimado">
+        <input type="text" class="input" placeholder="Nome da empresa">
+      </div>
+    </section>
+
+    <!-- ============== CARDS ============== -->
+    <section class="section" id="cards">
+      <span class="eyebrow">17 · Componentes</span>
+      <h2 class="h2">Cards</h2>
+      <p class="lead">Componente mais usado nas LPs. Estrutura: ícone + título + descrição. Hover sutil sinaliza interatividade.</p>
+
+      <div class="demo">
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <div class="card-title">Aprovação imediata</div>
+          <div class="card-desc">Análise automatizada e resposta em segundos, sem burocracia.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🛡️</div>
+          <div class="card-title">Segurança comprovada</div>
+          <div class="card-desc">25 anos de mercado, parceria Cielo, infraestrutura PCI DSS.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📈</div>
+          <div class="card-title">Mais conversão</div>
+          <div class="card-desc">Aumente vendas oferecendo flexibilidade ao seu cliente.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== BADGES ============== -->
+    <section class="section" id="badges">
+      <span class="eyebrow">18 · Componentes</span>
+      <h2 class="h2">Badges</h2>
+      <p class="lead">Pequenos rótulos para categorização, status e destaque pontual. Sempre concisos.</p>
+
+      <div class="demo">
+        <span class="badge badge-yellow">Novo</span>
+        <span class="badge badge-green">Aprovado</span>
+        <span class="badge badge-blue">B2B</span>
+        <span class="badge badge-neutral">Em análise</span>
+      </div>
+    </section>
+
+    <!-- ============== METODOLOGIAS ============== -->
+    <section class="section" id="metodologias">
+      <span class="eyebrow">19 · Aplicação</span>
+      <h2 class="h2">Metodologias aplicadas</h2>
+      <p class="lead">Frameworks que guiam decisões de produto e UX writing no Parcele Aqui.</p>
+
+      <div class="persona-grid">
+        <div class="persona-card">
+          <div class="persona-icon" style="background:var(--y-100);color:var(--y-800)">⚡</div>
+          <div class="persona-name">Lean &amp; Agile</div>
+          <div class="persona-segment">Conteúdo &amp; Produto</div>
+          <p class="card-desc" style="margin-top:12px">Conteúdos diretos, sem "prosa" desnecessária. Foco na ação (Single Choice). Iteração contínua sobre entregas grandes.</p>
+        </div>
+
+        <div class="persona-card">
+          <div class="persona-icon" style="background:var(--g-100);color:var(--g-800)">🎯</div>
+          <div class="persona-name">Design Thinking</div>
+          <div class="persona-segment">UX &amp; Empatia</div>
+          <p class="card-desc" style="margin-top:12px">Entender o estresse do cliente no momento da cobrança para oferecer o parcelamento como alívio. Empatia antes de solução.</p>
+        </div>
+
+        <div class="persona-card">
+          <div class="persona-icon" style="background:var(--b-100);color:var(--b-800)">📐</div>
+          <div class="persona-name">Six Sigma</div>
+          <div class="persona-segment">Qualidade &amp; Fricção</div>
+          <p class="card-desc" style="margin-top:12px">Redução de erros de comunicação para evitar fricção no checkout. Cada passo medido e otimizado.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== REGRAS ============== -->
+    <section class="section" id="regras">
+      <span class="eyebrow">20 · Aplicação</span>
+      <h2 class="h2">Regras críticas</h2>
+      <p class="lead">Princípios não-negociáveis. Quebrar essas regras compromete consistência, acessibilidade ou identidade da marca.</p>
+
+      <h3 class="h3">Cor</h3>
+      <div class="do-dont">
+        <div class="do-dont-card do">
+          <span class="do-dont-label">✓ Faça</span>
+          <p>Use amarelo como acento (CTAs, ondas, destaques pontuais). Texto sobre amarelo sempre <code class="inline">n-900</code>.</p>
+        </div>
+        <div class="do-dont-card dont">
+          <span class="do-dont-label">✗ Não faça</span>
+          <p>Não use amarelo em fundos extensos (cansa a vista). Não use texto branco sobre amarelo (falha WCAG AA).</p>
+        </div>
+      </div>
+
+      <h3 class="h3">Tipografia</h3>
+      <div class="do-dont">
+        <div class="do-dont-card do">
+          <span class="do-dont-label">✓ Faça</span>
+          <p>Apenas Kufam (display) + DM Sans (body). Hierarquia por peso e cor, não só tamanho.</p>
+        </div>
+        <div class="do-dont-card dont">
+          <span class="do-dont-label">✗ Não faça</span>
+          <p>Não introduza terceiras fontes. Não use Kufam em corpo de texto longo (cansa). Não use DM Sans em headlines de hero (perde impacto).</p>
+        </div>
+      </div>
+
+      <h3 class="h3">Espaçamento</h3>
+      <div class="do-dont">
+        <div class="do-dont-card do">
+          <span class="do-dont-label">✓ Faça</span>
+          <p>Sempre múltiplos de 4px. Use os tokens da escala. Respiração generosa entre seções.</p>
+        </div>
+        <div class="do-dont-card dont">
+          <span class="do-dont-label">✗ Não faça</span>
+          <p>Valores arbitrários (15px, 22px, 37px). Espaçamentos apertados em mobile. Misturar grids no mesmo projeto.</p>
+        </div>
+      </div>
+
+      <h3 class="h3">Voz</h3>
+      <div class="do-dont">
+        <div class="do-dont-card do">
+          <span class="do-dont-label">✓ Faça</span>
+          <p>Use "fôlego de caixa", "organizar", "descomplicar". Reconheça a pressão antes de oferecer a solução. Verbo + benefício em todo CTA.</p>
+        </div>
+        <div class="do-dont-card dont">
+          <span class="do-dont-label">✗ Não faça</span>
+          <p>Não use "endividamento", "última chance", "aprovado em 5 minutos". Não crie pânico. Não venda crédito — ofereça respiro.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== GUIA FIGMA ============== -->
+    <section class="section" id="guia-figma">
+      <span class="eyebrow">21 · Aplicação</span>
+      <h2 class="h2">Guia · Figma</h2>
+      <p class="lead">Como aplicar este DS no Figma em 6 passos práticos.</p>
+
+      <div class="guide-step">
+        <div class="guide-num">01</div>
+        <div class="guide-content">
+          <h4>Criar arquivo "Parcele Aqui — Design System"</h4>
+          <p>Arquivo dedicado, não misture com LPs. Páginas: Foundations · Components · Sections · Templates.</p>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-num">02</div>
+        <div class="guide-content">
+          <h4>Importar fontes Kufam e DM Sans</h4>
+          <p>Em Text Properties, selecione Kufam e DM Sans (já disponíveis no Figma atualizado). Senão, instale via Plugins → Google Fonts.</p>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-num">03</div>
+        <div class="guide-content">
+          <h4>Criar Color Styles (camada semântica)</h4>
+          <p>Crie estilos com nomes hierárquicos: <code>color/bg</code>, <code>color/bg/brand</code>, <code>color/fg/heading</code>, etc.</p>
+          <p><strong>Importante:</strong> não crie styles de primitivos diretamente — só os semânticos. Isso protege seu DS de mudanças futuras.</p>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-num">04</div>
+        <div class="guide-content">
+          <h4>Criar Text Styles</h4>
+          <p>Para cada item da type scale (display-xl até label-sm), crie um Text Style com nome correspondente: <code>display/xl</code>, <code>heading/lg</code>, <code>body/md</code>, etc.</p>
+          <p>Configure: família, peso, tamanho, line-height, letter-spacing.</p>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-num">05</div>
+        <div class="guide-content">
+          <h4>Auditar contraste com plugin Stark</h4>
+          <p>Antes de criar componentes, rode o plugin Stark em todas as combinações cor + texto. Documente combinações aprovadas e proibidas em uma página separada.</p>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-num">06</div>
+        <div class="guide-content">
+          <h4>Construir componentes com Auto Layout + Variants</h4>
+          <p>Comece pelos atômicos (Button, Input, Badge), depois moleculares (Cards, FAQ), por último organisms (Hero, Footer).</p>
+          <p>Use Properties para variantes e estados (hover, focus, disabled). Nomenclatura: <code>Component/Variant/State</code>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== GUIA FRAMER ============== -->
+    <section class="section" id="guia-framer">
+      <span class="eyebrow">22 · Aplicação</span>
+      <h2 class="h2">Guia · Framer</h2>
+      <p class="lead">Como replicar o DS do Figma para o Framer e usar ao construir LPs.</p>
+
+      <div class="guide-step">
+        <div class="guide-num">01</div>
+        <div class="guide-content">
+          <h4>Configurar Color Styles no Framer</h4>
+          <p>Em Design → Colors, crie um Color Style para cada token semântico. Use os mesmos nomes do Figma para consistência.</p>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-num">02</div>
+        <div class="guide-content">
+          <h4>Configurar Text Styles no Framer</h4>
+          <p>Em Design → Text, crie Text Styles para cada nível da type scale. Importe Kufam e DM Sans em Site Settings → Fonts.</p>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-num">03</div>
+        <div class="guide-content">
+          <h4>Recriar componentes como Components Framer</h4>
+          <p>Para cada componente do Figma, crie equivalente no Framer com Variants. Dica: use Smart Components com props (texto, ícone, link).</p>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-num">04</div>
+        <div class="guide-content">
+          <h4>Salvar como Site Library</h4>
+          <p>Em Framer, salve componentes em uma "Site Library" — biblioteca compartilhada entre LPs. Mudanças propagam automaticamente.</p>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-num">05</div>
+        <div class="guide-content">
+          <h4>Construir LP como remix de componentes</h4>
+          <p>Cada nova LP é montada arrastando componentes da biblioteca e ajustando apenas conteúdo (textos, imagens, links). <strong>Nunca redesenhe do zero.</strong></p>
+        </div>
+      </div>
+
+      <div class="callout callout-info">
+        <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <div class="callout-content">
+          <strong>Componentes especiais (Code Components)</strong>
+          <p>Para componentes com lógica (Calculadora de Comissão, Simulador de Parcelamento), use Code Components do Framer — React + TypeScript dentro do Framer. Lógica reaproveitável quando migrarmos para Next.js.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== ROADMAP ============== -->
+    <section class="section" id="roadmap">
+      <span class="eyebrow">23 · Roadmap</span>
+      <h2 class="h2">Próximas versões</h2>
+      <p class="lead">O que vem depois desta V1 do Design System.</p>
+
+      <h3 class="h3">V1.1 · Componentes especiais</h3>
+      <ul class="list">
+        <li>Calculadora de Comissão B2B (Framer Code Component)</li>
+        <li>Simulador de Parcelamento B2C</li>
+        <li>Form de captação inline com validação</li>
+        <li>Banner sticky de CTA mobile</li>
+      </ul>
+
+      <h3 class="h3">V1.2 · Acessibilidade reforçada</h3>
+      <ul class="list">
+        <li>Auditoria completa axe DevTools em todas as LPs publicadas</li>
+        <li>Documentação de focus states</li>
+        <li>Padrões de skip links e landmarks</li>
+        <li>ARIA labels para componentes interativos</li>
+      </ul>
+
+      <h3 class="h3">V2 · Cor por vertical</h3>
+      <ul class="list">
+        <li>Verde Imobiliárias / Amarelo Contabilidades / Azul Negócios</li>
+        <li>Tokens de tema dinâmico (CSS custom properties por vertical)</li>
+        <li>Migração não-disruptiva — V1 continua funcionando</li>
+      </ul>
+
+      <h3 class="h3">V3 · Migração para código</h3>
+      <ul class="list">
+        <li>Tokens em TypeScript (objetos tipados)</li>
+        <li>Componentes React em packages/ui (monorepo Turborepo)</li>
+        <li>Storybook com testes visuais</li>
+        <li>Site de documentação dedicado em Next.js</li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <span>Parcele Aqui · Design System v1.0</span>
+      <span>Maio 2026 · Documento vivo</span>
+    </footer>
+  </main>
+</div>
+
+<script>
+  // Logo base64 inline
+  const LOGO = 'data:image/jpeg;base64,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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/9k=';
+
+  document.getElementById('logo-topbar').src = LOGO;
+  document.getElementById('logo-main').src = LOGO;
+  document.getElementById('logo-brand').src = LOGO;
+  document.getElementById('logo-dark').src = LOGO;
+  const floatingLogo = document.getElementById('logo-floating');
+  if (floatingLogo) floatingLogo.src = LOGO;
+
+  // Animação de contagem dos números (count-up)
+  function animateCount(el, target, duration = 1400) {
+    const start = performance.now();
+    const startVal = 0;
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      // easeOutExpo
+      const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      const current = Math.floor(startVal + (target - startVal) * eased);
+      el.textContent = current;
+      if (progress < 1) requestAnimationFrame(tick);
+      else el.textContent = target;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // Disparar animação quando as métricas entrarem na tela
+  const metricNums = document.querySelectorAll('.metric-value .num');
+  if (metricNums.length && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.animated) {
+          entry.target.dataset.animated = 'true';
+          const target = parseInt(entry.target.dataset.target, 10);
+          animateCount(entry.target, target);
+        }
+      });
+    }, { threshold: 0.3 });
+    metricNums.forEach(el => observer.observe(el));
+  }
+
+  // Theme toggle
+  function toggleTheme() {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-theme');
+    const next = current === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', next);
+    try { localStorage.setItem('pa-ds-theme', next); } catch(e) {}
+  }
+
+  // Restaurar tema salvo
+  try {
+    const saved = localStorage.getItem('pa-ds-theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e) {}
+
+  // Scroll spy
+  const sections = document.querySelectorAll('.section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  function updateActiveNav() {
+    let current = '';
+    const scrollY = window.scrollY + 120;
+    sections.forEach(section => {
+      if (scrollY >= section.offsetTop) current = section.id;
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  updateActiveNav();
+</script>
+</body>
+</html>
