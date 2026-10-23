@@ -1,58 +1,46 @@
-# Parcele Aqui — Design System
+# Parcele Aqui · Design System
 
-Documento vivo da identidade visual e estratégica do Parcele Aqui.
+Documento vivo da identidade visual do Parcele Aqui, para o portal e para a plataforma.
 
-Site estático, um único `index.html` autocontido (sem build). Publicado no Vercel.
+Site estático, sem build. Publicado no Vercel (preset **Other**, sem install command).
 
-## v1.2.1 — Julho 2026 · Fix de logo + downloads
+## v2.0 · Outubro 2026
 
-- **Logo migrado de JPEG base64 → SVGs inline otimizados** (redução de ~1.4 MB de metadados do Illustrator via SVGO).
-- **Adicionada pasta `/logos`** com 3 assets baixáveis:
-  - `parcele-aqui-logo.svg` (mark + wordmark horizontal, 1131×343)
-  - `parcele-aqui-icon.svg` (só o mark quadrado, 1200×1200)
-  - `parcele-aqui-icon-negativo.svg` (versão para fundos escuros, 104×88)
-- **Nova seção "Downloads"** no capítulo Logo, com preview e link direto para baixar cada SVG.
-- **Removido `hero-floating-logo`** — o quadradinho branco flutuante atrás dos badges do hero.
-- **Logo da topbar ampliado de 24px → 28px** para o wordmark ficar legível (proporção horizontal 3.3:1 precisa de mais altura).
-- **Cores oficiais do logo corrigidas na documentação**: `#FFCC1B` (mark amarelo), `#DAA500` (dobra dourada), `#1C1815` (pin), `#1D1D1B` (wordmark).
+Reconstruído a partir dos dois arquivos Figma aprovados:
 
-## v1.2 — Julho 2026 · Atualização tipográfica
+- Portal: https://www.figma.com/design/LxC1jHoS1UaNIQQppFBz7c/Novo-portal-Parcele-Aqui
+- Plataforma: https://www.figma.com/design/5jovrhn3uvUDkhswLwNdF4
 
-- **Trocada a fonte de display**: Kufam → **Fraunces** (serifa variable com eixos opsz, weight, SOFT, WONK). Escolha alinhada às tendências 2026 de fontes editoriais em fintech premium, sem cair no clichê da Bricolage Grotesque.
-- **Trocada a fonte de UI/corpo**: DM Sans → **Geist** (open source da Vercel). Acabamento premium em formulários, dashboards e componentes de interface.
-- Adicionados tokens `--fraunces-display`, `--fraunces-heading`, `--fraunces-body` para uso automático dos eixos variáveis por faixa de tamanho.
-- Hero headline compactado: line-height 0.98 → 0.9.
-- Adicionado `font-variant-numeric: tabular-nums` em métricas com números.
-- Atualizada a seção Tipografia com specs das duas novas famílias.
+O que mudou em relação à v1.x:
+
+- **Tipografia:** Young Serif (títulos), Hanken Grotesk (texto e interface), Bricolage Grotesque (números grandes). Sai Fraunces + Geist.
+- **Cores:** coleção `Parcele DS / Color` com modos Light e Dark. 60 primitivos e 44 semânticos, contraste AA auditado nos dois temas.
+- **Tema escuro:** `data-theme="dark"` no `<html>`. Sem atributo, segue o sistema.
+- **Ícones:** Phosphor regular (sai Lucide), servido localmente em `assets/phosphor`.
+- **Componentes:** botão com 6 estados e regra de fundo, campos, checkbox, radio, toggle, avisos, toasts, tooltip (novo), badges, pills, tags, cards, linha de parcela, método de pagamento, simulador, navegação do portal e da plataforma, menu mobile em acordeão, carrossel, FAQ, modal, cookies, rodapé e telas de sistema.
+- **Imagem:** sistema de ilustrações em risografia (elenco fixo, 53 cenas, objetos, padronagens e cenários) e banco de fotos, cada imagem com o prompt que a reproduz.
+- **Padrões:** hero das internas, regras do mobile (CTA nunca quebra, carrossel para 3+ cards), logo wall, formulários.
+- **Handoff:** `tokens/tokens.css` e `tokens/tokens.json` prontos para o código.
+
+Fora deste DS (em aprovação): textos, regras de negócio e conteúdos `[preencher]`.
 
 ## Estrutura
 
 ```
-parcele-aqui-ds-deploy/
-├── index.html
-├── vercel.json
-├── .gitignore
-├── README.md
-└── logos/
-    ├── parcele-aqui-logo.svg           (6 KB)
-    ├── parcele-aqui-icon.svg           (0.8 KB)
-    └── parcele-aqui-icon-negativo.svg  (0.7 KB)
+index.html                 documentação (gerada)
+tokens/tokens.css          variáveis CSS, claro e escuro
+tokens/tokens.json         mesmos tokens em JSON, com alias do Figma
+assets/ds.css              estilos da documentação e componentes de referência (pa-*)
+assets/ds.js               interações da documentação
+assets/phosphor/           fonte de ícones Phosphor regular (MIT)
+assets/ilustracoes/        cenas riso 1980x1020 (WebP)
+assets/ilustracoes-quadrado/ as mesmas cenas em 1200x1200 com respiro
+assets/objetos/            objetos riso com fundo transparente
+assets/padronagens/        padrões, texturas, tiles de papel e cenários
+assets/fotos/              banco de fotos do portal
+logos/                     SVGs oficiais
 ```
 
-## Deploy no Vercel
+## Fontes
 
-```bash
-cd parcele-aqui-ds-deploy
-git init
-git add .
-git commit -m "v1.2.1 · SVGs oficiais + downloads"
-git remote add origin <SEU_REPO>
-git push -u origin main
-```
-
-Preset Vercel: **Other** (sem build, sem install command).
-
-## Créditos
-
-Fontes: [Fraunces](https://fonts.google.com/specimen/Fraunces) + [Geist](https://fonts.google.com/specimen/Geist) — ambas gratuitas via Google Fonts.
-Ícones: [Phosphor](https://phosphoricons.com/).
+[Young Serif](https://fonts.google.com/specimen/Young+Serif), [Hanken Grotesk](https://fonts.google.com/specimen/Hanken+Grotesk) e [Bricolage Grotesque](https://fonts.google.com/specimen/Bricolage+Grotesque) via Google Fonts. Ícones: [Phosphor](https://phosphoricons.com/).
