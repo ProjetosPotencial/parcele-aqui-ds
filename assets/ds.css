@@ -706,6 +706,13 @@ table.t code{white-space:nowrap}
 .sw .fig,.mc .fig{font-family:var(--font-sans);font-size:11px;line-height:16px;color:var(--text-subtle)}
 .mineira{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-bottom:24px}
 .mc{display:flex;gap:14px;align-items:flex-start;padding:14px;border:1px solid var(--border-subtle);border-radius:16px;background:var(--surface-default)}
+button.mc{font:inherit;color:inherit;text-align:left;cursor:copy;width:100%;transition:border-color var(--d-fast) var(--ease-standard)}
+button.mc:hover{border-color:var(--border-control)}
+button.mc:focus-visible{outline:none;box-shadow:0 0 0 2px var(--surface-default),0 0 0 4px var(--focus-ring)}
+.mcb{display:flex;flex-direction:column;min-width:0}
+.mc .why{margin-top:6px;font-size:13px;line-height:19px;color:var(--text-default)}
+.mc code{align-self:flex-start;margin-top:6px;font-size:11px;color:var(--text-subtle);overflow-wrap:anywhere}
+.sem-row .mn{display:block;margin-top:2px;font-family:var(--font-serif);font-size:13px;color:var(--text-accent)}
 .mc .chip{width:56px;height:56px;border-radius:14px;flex-shrink:0;border:1px solid rgb(0 0 0 / .06)}
 .mc b{display:block;font-family:var(--font-serif);font-weight:400;font-size:20px;line-height:24px;color:var(--text-strong)}
 .mc p{margin:6px 0 0;font-size:13px;line-height:19px}
