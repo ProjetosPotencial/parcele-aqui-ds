@@ -236,3 +236,25 @@
     t.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
   });
 })();
+
+/* Slider de valor: o campo acompanha a barra e a barra acompanha o campo */
+(function () {
+  var brl = function (v) { return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); };
+  var parse = function (s) { var n = parseFloat(String(s).replace(/[^\d,]/g, '').replace(',', '.')); return isNaN(n) ? null : n; };
+  document.querySelectorAll('.pa-range').forEach(function (r) {
+    var field = r.closest('.pa-field'); if (!field) return;
+    var inp = field.querySelector('.pa-input'); if (!inp) return;
+    var paint = function () {
+      var p = (r.value - r.min) / (r.max - r.min) * 100;
+      r.style.setProperty('--fill', p + '%');
+    };
+    var sync = function () { var t = brl(+r.value); inp.value = t; r.setAttribute('aria-valuetext', t); paint(); };
+    r.addEventListener('input', sync);
+    inp.addEventListener('change', function () {
+      var n = parse(inp.value); if (n === null) { sync(); return; }
+      n = Math.min(+r.max, Math.max(+r.min, Math.round(n / +r.step || 1) * (+r.step || 1)));
+      r.value = n; sync();
+    });
+    paint();
+  });
+})();

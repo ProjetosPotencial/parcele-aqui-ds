@@ -5,6 +5,8 @@ Documento vivo da identidade visual do Parcele Aqui, para o portal e para a plat
 **Por que Quitanda.** O Parcele Aqui é de Belo Horizonte. Em Minas, quitanda é o conjunto de broa, biscoito e pão de queijo servido junto na mesa da tarde: peças diferentes, feitas com a mesma receita. O nome vale para o DS; as variáveis de código continuam técnicas (`var(--action-primary-bg)`).
 
 - Figma editável: https://www.figma.com/design/16KaiI0Di1klxX2DzlD1GZ
+- Autoria: Victor da Mata
+- Equipe: Projetos Potencial Tecnologia
 
 Site estático, sem build. Publicado no Vercel (preset **Other**, sem install command).
 
