@@ -113,7 +113,7 @@
   document.addEventListener('click', function (e) {
     var b = e.target.closest('[data-copy],[data-copy-text]');
     if (!b) return;
-    if (b.hasAttribute('data-copy')) { var el = $(b.getAttribute('data-copy')); if (el) copy(el.textContent, 'Prompt copiado'); }
+    if (b.hasAttribute('data-copy')) { var el = $(b.getAttribute('data-copy')); if (el) copy(el.textContent, b.getAttribute('data-copy-label') || 'Prompt copiado'); }
     else { var v = b.getAttribute('data-copy-text'); copy(v, v.length < 40 ? v + ' copiado' : 'Prompt copiado'); }
   });
 
@@ -207,27 +207,27 @@
     });
   });
 
-  /* Carrossel */
-  var car = $('#car'), dots = $$('#car-dots span');
-  function carSync() {
-    if (!car) return;
-    var cards = car.children, w = cards[0].getBoundingClientRect().width + 16;
-    var i = Math.round(car.scrollLeft / w);
-    dots.forEach(function (d, k) { d.classList.toggle('on', k === i); });
-    var prev = $('[data-car="prev"]'), next = $('[data-car="next"]');
-    if (prev) prev.disabled = car.scrollLeft < 4;
-    if (next) next.disabled = car.scrollLeft + car.clientWidth >= car.scrollWidth - 4;
-  }
-  if (car) {
-    car.addEventListener('scroll', function () { window.requestAnimationFrame(carSync); }, { passive: true });
-    $$('[data-car]').forEach(function (b) {
-      b.addEventListener('click', function () {
-        var w = car.children[0].getBoundingClientRect().width + 16;
-        car.scrollBy({ left: b.dataset.car === 'next' ? w : -w, behavior: reduce ? 'auto' : 'smooth' });
-      });
+  /* Carrossel: vale para todo bloco com data-carousel */
+  $$('[data-carousel]').forEach(function (wrap) {
+    var car = wrap.querySelector('.pa-car'); if (!car) return;
+    var dots = Array.prototype.slice.call(wrap.querySelectorAll('.pa-dots span'));
+    var step = function () { var c = car.children[0]; return c ? c.getBoundingClientRect().width + 16 : 0; };
+    var idx = function () { return Math.round(car.scrollLeft / (step() || 1)); };
+    var sync = function () { var i = idx(); dots.forEach(function (d, k) { d.classList.toggle('on', k === i); }); };
+    var go = function (i) {
+      var n = car.children.length; i = (i + n) % n;
+      car.scrollTo({ left: i * step(), behavior: reduce ? 'auto' : 'smooth' });
+    };
+    car.addEventListener('scroll', function () { window.requestAnimationFrame(sync); }, { passive: true });
+    wrap.querySelectorAll('[data-car]').forEach(function (b) {
+      b.addEventListener('click', function () { go(idx() + (b.dataset.car === 'next' ? 1 : -1)); });
     });
-    carSync();
-  }
+    car.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(idx() + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(idx() - 1); }
+    });
+    sync();
+  });
 
   /* Demonstração de duração */
   $$('.motion-track').forEach(function (t) {
@@ -256,5 +256,64 @@
       r.value = n; sync();
     });
     paint();
+  });
+})();
+
+
+/* Código copiável: gera o HTML de cada demonstração dos componentes */
+(function () {
+  var KINDS = ['Componentes', 'Plataforma', 'Padrões'];
+  var VOID = { area: 1, br: 1, col: 1, embed: 1, hr: 1, img: 1, input: 1, link: 1, meta: 1, source: 1, wbr: 1 };
+  var INLINE = { a: 1, b: 1, i: 1, span: 1, strong: 1, em: 1, small: 1, code: 1, s: 1, br: 1 };
+  var BOOL = /^(checked|disabled|hidden|readonly|open|required|selected|multiple)$/;
+  function attrs(el) {
+    var o = '';
+    for (var i = 0; i < el.attributes.length; i++) {
+      var a = el.attributes[i];
+      if (a.name === 'data-codegen' || a.name === 'tabindex' && el.classList.contains('pa-car') === false && a.value === '-1') continue;
+      o += ' ' + a.name + (a.value === '' && BOOL.test(a.name) ? '' : '="' + a.value.replace(/&/g, '&amp;').replace(/"/g, '&quot;') + '"');
+    }
+    return o;
+  }
+  function ser(node, d) {
+    var pad = new Array(d + 1).join('  ');
+    if (node.nodeType === 3) { var t = node.textContent.replace(/\s+/g, ' ').trim(); return t ? pad + t.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '\n' : ''; }
+    if (node.nodeType !== 1) return '';
+    var tag = node.tagName.toLowerCase();
+    if (tag === 'svg' && /parcele/i.test(node.getAttribute('aria-label') || '')) return pad + '<img src="logos/parcele-aqui-logo.svg" alt="Parcele Aqui" height="32">\n';
+    var open = '<' + tag + attrs(node) + '>';
+    if (VOID[tag]) return pad + open + '\n';
+    var kids = Array.prototype.slice.call(node.children);
+    var simple = kids.every(function (c) { return INLINE[c.tagName.toLowerCase()] && c.children.length === 0; });
+    if (tag === 'svg' || tag === 'pre' || (simple && node.innerHTML.length < 160)) {
+      var inner = tag === 'svg' || tag === 'pre' ? node.innerHTML : node.innerHTML.replace(/\s+/g, ' ').trim();
+      return pad + open + inner + '</' + tag + '>\n';
+    }
+    var out = pad + open + '\n';
+    Array.prototype.forEach.call(node.childNodes, function (c) { out += ser(c, d + 1); });
+    return out + pad + '</' + tag + '>\n';
+  }
+  function codeOf(demo) {
+    var c = demo.cloneNode(true);
+    Array.prototype.forEach.call(c.querySelectorAll('.demo-label,.demo-note,.code-box'), function (x) { x.remove(); });
+    var out = '';
+    Array.prototype.forEach.call(c.childNodes, function (n) { out += ser(n, 0); });
+    return out.trim();
+  }
+  var n = 0;
+  KINDS.forEach(function (k) {
+    document.querySelectorAll('.section[data-kind="' + k + '"] .demo').forEach(function (demo) {
+      if (demo.closest('.code-box') || demo.parentElement.closest('.demo')) return;
+      var id = 'code-' + (++n);
+      var d = document.createElement('details');
+      d.className = 'code-box';
+      d.innerHTML = '<summary><i class="ph ph-code" aria-hidden="true"></i>Código HTML<i class="ph ph-caret-down chev" aria-hidden="true"></i></summary>' +
+        '<div class="code-body"><button class="pa-btn sm ghost copy" type="button" data-copy="#' + id + '" data-copy-label="Código copiado"><i class="ph ph-copy" aria-hidden="true"></i>Copiar</button><pre><code id="' + id + '"></code></pre></div>' +
+        '<p class="hint">Requer <code>tokens/tokens.css</code>, <code>assets/ds.css</code> e os ícones Phosphor (<code>assets/phosphor/style.css</code>). Comportamentos (acordeão, carrossel, toast) estão em <code>assets/ds.js</code>.</p>';
+      demo.appendChild(d);
+      d.addEventListener('toggle', function () {
+        if (d.open && !d.dataset.ready) { d.querySelector('code').textContent = codeOf(demo); d.dataset.ready = '1'; }
+      });
+    });
   });
 })();
