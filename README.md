@@ -1,6 +1,10 @@
-# Parcele Aqui · Design System
+# Quitanda · Design System do Parcele Aqui
 
 Documento vivo da identidade visual do Parcele Aqui, para o portal e para a plataforma.
+
+**Por que Quitanda.** O Parcele Aqui é de Belo Horizonte. Em Minas, quitanda é o conjunto de broa, biscoito e pão de queijo servido junto na mesa da tarde: peças diferentes, feitas com a mesma receita. O nome vale para o DS; as variáveis de código continuam técnicas (`var(--action-primary-bg)`).
+
+- Figma editável: https://www.figma.com/design/16KaiI0Di1klxX2DzlD1GZ
 
 Site estático, sem build. Publicado no Vercel (preset **Other**, sem install command).
 
@@ -14,7 +18,7 @@ Reconstruído a partir dos dois arquivos Figma aprovados:
 O que mudou em relação à v1.x:
 
 - **Tipografia:** Young Serif (títulos), Hanken Grotesk (texto e interface), Bricolage Grotesque (números grandes). Sai Fraunces + Geist.
-- **Cores:** coleção `Parcele DS / Color` com modos Light e Dark. 60 primitivos e 44 semânticos, contraste AA auditado nos dois temas.
+- **Cores:** coleção `Quitanda / Color` com modos Light e Dark. 60 primitivos e 47 semânticos no modelo grupo / papel / variante (Text/Strong, Action/Primary/Bg, Status/Error/Bg...), contraste AA auditado nos dois temas.
 - **Tema escuro:** `data-theme="dark"` no `<html>`. Sem atributo, segue o sistema.
 - **Ícones:** Phosphor regular (sai Lucide), servido localmente em `assets/phosphor`.
 - **Componentes:** botão com 6 estados e regra de fundo, campos, checkbox, radio, toggle, avisos, toasts, tooltip (novo), badges, pills, tags, cards, linha de parcela, método de pagamento, simulador, navegação do portal e da plataforma, menu mobile em acordeão, carrossel, FAQ, modal, cookies, rodapé e telas de sistema.
